@@ -1,7 +1,7 @@
 const User = require("../model/User");
 const { hash } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { sendEmail } = require("../helper/email");
+const { sendEmail } = require("../helper/sendEmail");
 
 const JWT_PRIVATE_KEY = process.env.JWT_SECRET;
 
