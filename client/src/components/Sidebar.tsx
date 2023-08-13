@@ -14,24 +14,22 @@ const Sidebar = () => {
     
     return (
         <Stack spacing={3} sx={{ 
-            backgroundColor: theme.palette.background.paper, 
+            backgroundColor: theme.palette.background.paper,
             boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.25)",
             width: "70px", height: "100vh",
             alignItems: "center"
         }}>
         
-            <IconButton>
-                <Avatar 
-                    variant="rounded" 
-                    src={logo} sx={{ width: "60px", height: "60px" }}
-                />
-            </IconButton>
+            <Avatar 
+                variant="rounded" 
+                src={logo} sx={{ width: "60px", height: "60px" }}
+            />
 
-            <IconButton> <ChatIcon /> </IconButton>
-            <IconButton> <UsersIcon /> </IconButton>
-            <IconButton> <PhoneIcon /> </IconButton>
+            <IconButton> <ChatIcon fontSize="small"/> </IconButton>
+            <IconButton> <UsersIcon fontSize="small"/> </IconButton>
+            <IconButton> <PhoneIcon fontSize="small"/> </IconButton>
             <Divider sx={{ width: "80%" }}/>
-            <IconButton> <SettingsIcon /> </IconButton>
+            <IconButton> <SettingsIcon fontSize="small"/> </IconButton>
 
             <Stack spacing={3} flex={1} alignItems="center" justifyContent="end" p={4}>
                 <Switch onChange={() => { theme.palette.mode = "dark" }}/>
