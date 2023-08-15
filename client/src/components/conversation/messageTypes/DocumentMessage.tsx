@@ -1,5 +1,6 @@
 import { Stack, Typography, IconButton, Divider } from "@mui/material";
 import { DownloadSimple, File } from "@phosphor-icons/react";
+import MessageOptions from "../MessageOptions";
 
 const DocumentMessage = ({ message, incoming }: any) => {
     return (
@@ -31,6 +32,7 @@ const DocumentMessage = ({ message, incoming }: any) => {
                     {message}
                 </Typography>
             </Stack>
+            <MessageOptions />
         </Stack>
     );
 }

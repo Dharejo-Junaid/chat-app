@@ -1,14 +1,16 @@
 import { Stack, TextField, InputAdornment, IconButton, Box, Button } from "@mui/material";
-import { Smiley, TelegramLogo } from "@phosphor-icons/react";
-import { useState } from "react";
 import { Link } from "@phosphor-icons/react";
+import { useState } from "react";
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import ConversationSpeedDial from "./ConversationSpeedDial";
+import { Send, SentimentSatisfiedAlt } from "@mui/icons-material";
 
 const Footer = () => {
     
-    const [userMessage, setUserMessage] = useState("");
+    const [ userMessage, setUserMessage ] = useState("");
     const [ openEmoiPicker, setOpenEmojiPicker ] = useState(false);
+    const [ openSpeedDial, setOpenSpeedDial ] = useState(false);
     
     return (
         <Stack
@@ -29,16 +31,19 @@ const Footer = () => {
                     fullWidth
                     sx={{ backgroundColor: "white"}}
                     InputProps={{
-                        startAdornment: 
-                            <InputAdornment position="start">
-                                <IconButton><Link /></IconButton>
-                            </InputAdornment>,
+                        startAdornment:
+                            <Stack>
+                                { openSpeedDial && <ConversationSpeedDial /> }
+                                <InputAdornment position="start">
+                                    <IconButton onClick={() => setOpenSpeedDial(!openSpeedDial)}> <Link  color="#4B4B4B"/> </IconButton>
+                                </InputAdornment>
+                            </Stack>,
 
                         endAdornment:
                             <InputAdornment position="end">
                                 <IconButton onClick={() => {
                                     setOpenEmojiPicker((prev) => !prev);
-                                }}><Smiley /></IconButton>
+                                }}><SentimentSatisfiedAlt sx={{ color: "#4B4B4B"}} /></IconButton>
                             </InputAdornment>
                     }}
                 />
@@ -49,7 +54,7 @@ const Footer = () => {
                 </Box>
             </Stack>
             
-            <Button variant="contained" sx={{ maxWidth: "40px", height: "40px" }}><TelegramLogo size="large"/></Button>
+            <IconButton><Send sx={{color: "#080707"}}/></IconButton>
         </Stack>
     );
 }

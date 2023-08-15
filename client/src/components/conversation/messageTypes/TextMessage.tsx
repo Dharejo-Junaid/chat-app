@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import MessageOptions from "../MessageOptions";
 
 export const TextMessage = ({ incoming, message }: any) => {
 
@@ -20,6 +21,7 @@ export const TextMessage = ({ incoming, message }: any) => {
             >
                 {message}
             </Typography>
+            <MessageOptions />
         </Stack>
     );
 }

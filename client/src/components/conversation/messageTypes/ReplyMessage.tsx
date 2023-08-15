@@ -1,4 +1,5 @@
 import { Stack, Typography } from "@mui/material";
+import MessageOptions from "../MessageOptions";
 
 const ReplyMessage = ({ reply, message, incoming }: any) => {
     return (
@@ -36,6 +37,7 @@ const ReplyMessage = ({ reply, message, incoming }: any) => {
                     {reply}
                 </Typography>
             </Stack>
+            <MessageOptions />
         </Stack>
     );
 }

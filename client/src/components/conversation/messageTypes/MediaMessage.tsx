@@ -1,4 +1,5 @@
 import { Stack, Typography, useTheme } from "@mui/material";
+import MessageOptions from "../MessageOptions";
 
 const MediaMessage = ({ message, img, incoming }: any) => {
 
@@ -26,6 +27,7 @@ const MediaMessage = ({ message, img, incoming }: any) => {
                     {message}
                 </Typography>
             </Stack>
+            <MessageOptions />
         </Stack>
     );
 }
