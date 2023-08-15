@@ -1,11 +1,12 @@
 import { faker } from "@faker-js/faker";
 import { Stack, Badge, Avatar, Typography } from "@mui/material";
 
-const ChatElement = ( { id, img, name, msg, time, unread, online }: any ) => {
+const ChatElement = ( { id, img, name, msg, time, unread, online }: any) => {
+
     return (
         <Stack
             key={id}
-            direction="row" 
+            direction="row"
             justifyContent="space-between"
             padding={1.5}
             borderRadius={1.5}
@@ -13,14 +14,7 @@ const ChatElement = ( { id, img, name, msg, time, unread, online }: any ) => {
         >
             
             <Stack direction="row" alignItems="center">
-                {
-                    online? 
-                        <Badge variant="dot" color="success">
-                            <Avatar src={faker.image.avatar()} alt={name}/>
-                        </Badge>
-                    :
                     <Avatar src={faker.image.avatar()} alt={name}/>
-                }
 
                 <Stack marginLeft={2.5}>
                     <Typography>{name}</Typography>

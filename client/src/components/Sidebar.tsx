@@ -1,11 +1,7 @@
-import { Avatar, Stack, useTheme, IconButton, Divider, Switch } from "@mui/material";
+import { Avatar, Stack, useTheme, IconButton, Divider, Switch, Paper } from "@mui/material";
 import logo from "../assets/logo.png";
+import { ChatCircleDots, Users, Phone, Gear } from "@phosphor-icons/react";
 
-import ChatIcon from '@mui/icons-material/Chat';
-import UsersIcon from '@mui/icons-material/GroupOutlined';
-import PhoneIcon from '@mui/icons-material/Phone';
-
-import SettingsIcon from '@mui/icons-material/Settings';
 import { faker } from "@faker-js/faker";
 
 const Sidebar = () => {
@@ -13,11 +9,11 @@ const Sidebar = () => {
     const theme = useTheme();
     
     return (
-        <Stack spacing={3} sx={{ 
-            backgroundColor: theme.palette.background.paper,
-            boxShadow: "1px 1px 2px rgba(0, 0, 0, 0.25)",
-            width: "70px", height: "100vh",
-            alignItems: "center"
+        <Stack spacing={3} sx={{
+            width: "70px", maxHeight: "100%",
+            alignItems: "center",
+            backgroundColor: "#F0F4FA", 
+            boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)"
         }}>
         
             <Avatar 
@@ -25,11 +21,11 @@ const Sidebar = () => {
                 src={logo} sx={{ width: "60px", height: "60px" }}
             />
 
-            <IconButton> <ChatIcon fontSize="small"/> </IconButton>
-            <IconButton> <UsersIcon fontSize="small"/> </IconButton>
-            <IconButton> <PhoneIcon fontSize="small"/> </IconButton>
+            <IconButton> <ChatCircleDots color="#080707"/> </IconButton>
+            <IconButton> <Users color="#080707"/> </IconButton>
+            <IconButton> <Phone color="#080707"/> </IconButton>
             <Divider sx={{ width: "80%" }}/>
-            <IconButton> <SettingsIcon fontSize="small"/> </IconButton>
+            <IconButton> <Gear color="#080707"/> </IconButton>
 
             <Stack spacing={3} flex={1} alignItems="center" justifyContent="end" p={4}>
                 <Switch onChange={() => { theme.palette.mode = "dark" }}/>

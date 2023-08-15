@@ -1,15 +1,14 @@
 import { InputAdornment, TextField } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { MagnifyingGlass } from "@phosphor-icons/react";
 
 const Searchbar = () => {
     return (
         <TextField 
-            label="Search" 
-            size="small" 
-            sx={{ margin: "20px" }}
+            placeholder="Search" 
+            size="small"
             InputProps={{
                 endAdornment: <InputAdornment position="end"> 
-                    <SearchIcon /> 
+                    <MagnifyingGlass color="#4B4B4B" fontSize="large"/> 
                 </InputAdornment>
             }}
         />
