@@ -1,12 +1,17 @@
 import { faker } from "@faker-js/faker";
 import { Stack, Avatar, Typography, IconButton } from "@mui/material";
 import { Phone, VideoCamera, CaretDown } from "@phosphor-icons/react";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "../../redux/slices/app";
 
 const Header = () => {
+
+    const dispatch = useDispatch();
 
     return (
         <Stack
             maxWidth="100%"
+            height="60px"
             p={1}
             direction="row"
             alignItems="center"
@@ -14,7 +19,16 @@ const Header = () => {
             sx={{ backgroundColor: "#F8FAFF", boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)" }}
         >
 
-            <Stack direction="row" spacing={2}>
+            <Stack
+                onClick={() => dispatch(toggleSidebar())}
+                direction="row"
+                spacing={2}
+                sx={{
+                    ":hover": {
+                        cursor: "pointer"
+                    }
+                }}
+            >
                 <Avatar src={faker.image.avatar()} alt="J"/>
                 <Stack>
                     <Typography>Junaid</Typography>

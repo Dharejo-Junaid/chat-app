@@ -1,4 +1,4 @@
-import { Stack, TextField, InputAdornment, IconButton, Box, Button } from "@mui/material";
+import { Stack, TextField, InputAdornment, IconButton, Box } from "@mui/material";
 import { Link } from "@phosphor-icons/react";
 import { useState } from "react";
 import data from '@emoji-mart/data';
@@ -20,7 +20,7 @@ const Footer = () => {
             alignItems="center"
             justifyContent="space-between"
             spacing={2}
-            sx={{ backgroundColor: "#F8FAFF", boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)"}}
+            sx={{ backgroundColor: "#F8FAFF" }}
         >
             <Stack direction="row" width="100%">
                 <TextField

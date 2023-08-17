@@ -8,9 +8,10 @@ const Chats = () => {
 
     return (
         <Stack 
-            p="12px" 
+            p="12px"
             maxHeight="100%"
-            width="450px"
+            minWidth="300px"
+            maxWidth="3000px"
             sx={{ 
                 backgroundColor: "#F8FAFF",
                 overflowY: "scroll"

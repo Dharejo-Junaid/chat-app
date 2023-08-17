@@ -43,7 +43,7 @@ const Sidebar = () => {
         }}>
         
             <Avatar 
-                variant="rounded" 
+                variant="rounded"
                 src={logo} sx={{ width: "60px", height: "60px" }}
             />
 
