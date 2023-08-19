@@ -4,10 +4,14 @@ import Sidebar from "../../components/Sidebar";
 import Conversation from "../../components/conversation";
 import Contact from "../../components/Contact";
 import { useSelector } from "react-redux";
+import SharredMessages from "../../components/SharredMessages";
+import StarredMessages from "../../components/StarredMessages";
 
 const Dashboard = () => {
 
-    const open = useSelector((state: any) => state.app.contact.open);
+    const sidebar = useSelector((state: any) => state.app.sidebar);
+    console.log("Sidebar = ", sidebar);
+    
 
     return (
         <Stack direction="row" maxWidth="100vw" height="100vh" maxHeight="100vh">
@@ -16,7 +20,15 @@ const Dashboard = () => {
             <Conversation />
 
             {
-                open && <Contact />
+                sidebar.open && sidebar.type === "CONTACT" && <Contact />
+            }
+
+            {
+                sidebar.open && sidebar.type === "SHARRED_MESSAGES" && <SharredMessages />
+            }
+
+            {
+                sidebar.open && sidebar.type === "STARRED_MESSAGES" && <StarredMessages />
             }
             
         </Stack>

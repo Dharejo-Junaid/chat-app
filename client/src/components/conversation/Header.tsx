@@ -20,7 +20,7 @@ const Header = () => {
         >
 
             <Stack
-                onClick={() => dispatch(toggleSidebar())}
+                onClick={ () => dispatch(toggleSidebar()) }
                 direction="row"
                 spacing={2}
                 sx={{

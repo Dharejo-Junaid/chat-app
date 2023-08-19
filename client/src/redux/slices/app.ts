@@ -1,19 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    contact: {
-        open: true,
+    sidebar: {
+        open: false,
         type: "CONTACT"
     }
 }
 
 const reducers = {
     toggleSidebar: (state: typeof initialState) => {
-        state.contact.open = !state.contact.open;        
+        state.sidebar.open = !state.sidebar.open;        
     },
 
-    updateSidebarType: (state: typeof initialState, action: any) => {
-        state.contact.type = action.payload.type;
+    updateSidebarToContact: (state: typeof initialState) => {
+        state.sidebar.type = "CONTACT";
+    },
+
+    updateSidebarToSharredMessage: (state: typeof initialState) => {
+        state.sidebar.type = "SHARRED_MESSAGES";
+    },
+
+    updateSidebarToStarredMessages: (state: typeof initialState) => {
+        state.sidebar.type = "STARRED_MESSAGES";
     }
 }
 
@@ -25,4 +33,9 @@ const slice = createSlice({
 
 export default slice.reducer;
 const { actions } = slice;
-export const { toggleSidebar } = actions;
+export const {
+    toggleSidebar,
+    updateSidebarToContact,
+    updateSidebarToSharredMessage,
+    updateSidebarToStarredMessages
+} = actions;

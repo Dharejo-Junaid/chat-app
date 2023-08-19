@@ -152,3 +152,99 @@ export const ChatList = [
       outgoing: true,
     },
   ];
+
+  export const SHARRED_DOCS = [
+    
+    {
+      type: "msg",
+      subtype: "doc",
+      message: "Yes sure, here you go.",
+      incoming: true,
+      outgoing: false,
+    },
+    {
+      type: "msg",
+      subtype: "doc",
+      message: "Yes sure, here you go.",
+      incoming: true,
+      outgoing: false,
+    },
+    {
+      type: "msg",
+      subtype: "doc",
+      message: "Yes sure, here you go.",
+      incoming: true,
+      outgoing: false,
+    },
+    {
+      type: "msg",
+      subtype: "doc",
+      message: "Yes sure, here you go.",
+      incoming: true,
+      outgoing: false,
+    },
+    {
+      type: "msg",
+      subtype: "doc",
+      message: "Yes sure, here you go.",
+      incoming: true,
+      outgoing: false,
+    },
+  ]
+
+  export const SHARRED_LINKS = [
+
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    },
+    
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    },
+
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    },
+
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    },
+
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    },
+
+    {
+      type: "msg",
+      subtype: "link",
+      preview: faker.image.cats(),
+      message: "Yep, I can also do that",
+      incoming: true,
+      outgoing: false,
+    }
+  ]

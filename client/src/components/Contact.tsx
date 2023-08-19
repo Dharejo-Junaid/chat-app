@@ -1,30 +1,52 @@
 import { faker } from "@faker-js/faker";
-import { Avatar, Box, Button, Divider, IconButton, Stack, Switch, Typography } from "@mui/material";
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Stack, Switch, Typography } from "@mui/material";
 import { Bell, CaretRight, FlagBanner, Phone, Star, Trash, VideoCamera, XCircle } from "@phosphor-icons/react";
+import { useDispatch } from "react-redux";
+import { toggleSidebar, updateSidebarToSharredMessage, updateSidebarToStarredMessages } from "../redux/slices/app";
+import { useState } from "react";
 
 const Contact = () => {
+
+    const dispatch = useDispatch();
+
+    const [ openBlockDialog, setOpenBlockDialog ] = useState(false);
+    const [ openDeleteDialog, setOpenDeleteDialog ] = useState(false);
+
+    const handleBlockClose = () => {
+        setOpenBlockDialog(false);
+    }
+
+    const handleDeleteClose = () => {
+        setOpenDeleteDialog(false);
+    }
+
     return (
         <Box
             minWidth="300px"
             maxWidth="3000px"
             height="100vh"
+            display="flex"
+            flexDirection="column"
         >
 
             <Stack
                 direction="row"
                 alignItems="center"
-                height="60px"
+                minHeight="60px"
+                maxHeight="60px"
                 spacing={1.5}
                 paddingLeft={2.5}
                 paddingRight={2.5}
                 boxShadow="0 0 2px rgba(0, 0, 0, 0.25)"
                 sx={{ backgroundColor: "#F8FAFF" }}
             >
-                <IconButton> <XCircle color="#4B4B4B"/> </IconButton>
+                <IconButton onClick={ () => dispatch(toggleSidebar()) }>
+                    <XCircle color="#4B4B4B"/>
+                </IconButton>
                 <Typography variant="subtitle1">Contact info</Typography>
             </Stack>
 
-            <Stack p={2} spacing={1.5}>
+            <Stack p={2} spacing={1.5} flexGrow={1} sx={{ overflowY: "scroll" }}>
 
                 <Stack direction="row" alignItems="center" spacing={1.5} p={1}>
                     <Avatar
@@ -67,7 +89,11 @@ const Contact = () => {
 
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="caption">Media, links and docs</Typography>
-                    <Button size="small" endIcon={<CaretRight />}>
+                    <Button
+                        size="small"
+                        endIcon={<CaretRight />}
+                        onClick={() => dispatch(updateSidebarToSharredMessage())}
+                    >
                         401
                     </Button>
                 </Stack>
@@ -90,7 +116,7 @@ const Contact = () => {
                         <Star size={20}/>
                         <Typography variant="caption">Starred Messages</Typography>
                     </Stack>
-                    <IconButton size="small">
+                    <IconButton size="small" onClick={() => dispatch(updateSidebarToStarredMessages())}>
                         <CaretRight color="black"/>
                     </IconButton>
                 </Stack>
@@ -112,7 +138,7 @@ const Contact = () => {
                     <Stack direction="row" alignItems="center" spacing={1.5} p={2}>
                         <Avatar
                             src={faker.image.avatar()}
-                            alt={faker.name.firstName()}
+                            alt={faker.person.firstName()}
                             sx={{
                                 width: "40px",
                                 height: "40px"
@@ -125,12 +151,67 @@ const Contact = () => {
                     </Stack>
 
                     <Stack direction="row" spacing={3} paddingTop={2} justifyContent="center">
-                        <Button variant="outlined" startIcon={<FlagBanner />}>Block</Button>
-                        <Button variant="outlined" startIcon={<Trash />}>Delete</Button>
+                        <Button
+                            variant="outlined"
+                            startIcon={<FlagBanner />}
+                            onClick={() => setOpenBlockDialog(true)}
+                        >
+                            Block
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            startIcon={<Trash />}
+                            onClick={() => setOpenDeleteDialog(true)}
+                        >
+                            Delete
+                        </Button>
                     </Stack>
                 </Stack>
             </Stack>
+            
+            { openBlockDialog && <BlockDialog open={openBlockDialog} onClose={handleBlockClose}/> }
+            { openDeleteDialog && <DeleteDialog open={openDeleteDialog} onClose={handleDeleteClose}/> }
         </Box>
+    );
+}
+
+const BlockDialog = ({ open, onClose }: any) => {
+
+    return (
+        <Dialog open={open} onClose={onClose}>
+            <DialogTitle>
+                Block this contact?
+            </DialogTitle>
+
+            <DialogContent>
+                <DialogContentText>Are you sure you want to block this contact?</DialogContentText>
+            </DialogContent>
+
+            <DialogActions>
+                <Button onClick={onClose}>Cancel</Button>
+                <Button autoFocus onClick={onClose}>Block</Button>
+            </DialogActions>
+        </Dialog>
+    );
+}
+
+const DeleteDialog = ({ open, onClose }: any) => {
+
+    return (
+        <Dialog open={open} onClose={onClose}>
+            <DialogTitle>
+                Delete this chat?
+            </DialogTitle>
+
+            <DialogContent>
+                <DialogContentText>Are you sure you want to delete this chat?</DialogContentText>
+            </DialogContent>
+
+            <DialogActions>
+                <Button onClick={onClose}>Cancel</Button>
+                <Button autoFocus onClick={onClose}>Delete</Button>
+            </DialogActions>
+        </Dialog>
     );
 }
 
