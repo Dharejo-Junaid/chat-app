@@ -10,7 +10,13 @@ const ChatElement = ( { id, img, name, msg, time, unread, online }: any) => {
             justifyContent="space-between"
             padding={1.5}
             borderRadius={1.5}
-            sx={{ backgroundColor: "#fff", alignItems: "center" }}
+            sx={{
+                backgroundColor: "#fff",
+                alignItems: "center",
+                ":hover": {
+                    cursor: "pointer"
+                }
+            }}
         >
             
             <Stack direction="row" alignItems="center">

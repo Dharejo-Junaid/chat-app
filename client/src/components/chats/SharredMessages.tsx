@@ -1,9 +1,10 @@
-import { Box, Stack, IconButton, Typography, Tabs, Tab, ImageList, ImageListItem, Paper, Divider } from "@mui/material"
-import { ArrowLeft, DownloadSimple, File } from "@phosphor-icons/react"
-import { updateSidebarToContact } from "../redux/slices/app"
-import { useDispatch } from "react-redux"
-import { useState } from "react"
-import { faker } from "@faker-js/faker"
+import { Box, Stack, IconButton, Typography, Tabs, Tab, ImageList, ImageListItem, Paper, Divider } from "@mui/material";
+import { ArrowLeft, DownloadSimple, File } from "@phosphor-icons/react";
+import { updateSidebarToContact } from "../../redux/slices/app";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { faker } from "@faker-js/faker";
+import { SHARRED_LINKS, SHARRED_DOCS } from "../../contents/data";
 
 const SharredMessages = () => {
 
@@ -11,7 +12,7 @@ const SharredMessages = () => {
 
     const [ selectedTab, setSelectedTab ] = useState(0);
     
-    const handleChange = (event: any, value: number) => {
+    const handleChange = (_event: any, value: number) => {
         setSelectedTab(value);
     }
 
@@ -84,7 +85,7 @@ const MediaTab = () => {
     );
 }
 
-import { SHARRED_LINKS } from "../contents/data"
+
 
 const LinksTab = () => {
     return (
@@ -113,13 +114,11 @@ const LinksTab = () => {
     );
 }
 
-import { SHARRED_DOCS } from "../contents/data";
-
 const DocsTab = () => {
     return (
         <>
             {
-                SHARRED_DOCS.map(el => {
+                SHARRED_DOCS.map(() => {
                     return (
                         <Paper elevation={4} sx={{ p: "10px" }}>
                         <Stack direction="row" alignItems="center" justifyContent="space-between">

@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Stack, Switch, Typography } from "@mui/material";
 import { Bell, CaretRight, FlagBanner, Phone, Star, Trash, VideoCamera, XCircle } from "@phosphor-icons/react";
 import { useDispatch } from "react-redux";
-import { toggleSidebar, updateSidebarToSharredMessage, updateSidebarToStarredMessages } from "../redux/slices/app";
+import { toggleSidebar, updateSidebarToSharredMessage, updateSidebarToStarredMessages } from "../../redux/slices/app";
 import { useState } from "react";
 
 const Contact = () => {

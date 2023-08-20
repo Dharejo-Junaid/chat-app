@@ -1,6 +1,6 @@
 import { Stack, Typography, IconButton, Divider } from "@mui/material";
 import { DownloadSimple, File } from "@phosphor-icons/react";
-import MessageOptions from "../MessageOptions";
+import MessageOptions from "../conversation/MessageOptions";
 
 const DocumentMessage = ({ message, incoming }: any) => {
     return (

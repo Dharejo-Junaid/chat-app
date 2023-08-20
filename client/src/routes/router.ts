@@ -1,23 +1,61 @@
 import { createBrowserRouter } from "react-router-dom";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/Login";
+import ForgetPassword from "../pages/auth/ForgetPassword";
+import ResetPassword from "../pages/auth/ResetPassword";
+import AuthLayout from "../layouts/Auth";
+import DashboardLayout from "../layouts/Dashboard";
+import Settings from "../pages/dashboard/Settings";
+import Page404 from "../pages/Page404";
 import Dashboard from "../pages/dashboard/Dashboard";
 
 const router = createBrowserRouter([
 
     {
+        path: "/auth",
+        Component: AuthLayout,
+        children: [
+            {
+                path: "signup",
+                Component: Signup
+            },
+
+            {
+                "path": "login",
+                Component: Login
+            },
+
+            {
+                path: "forgetpassword",
+                Component: ForgetPassword
+            },
+
+            {
+                path: "resetpassword",
+                Component: ResetPassword
+            }
+        ]
+    },
+
+    {
         path: "/",
-        Component: Dashboard
+        Component: DashboardLayout,
+        children: [
+            {
+                path: "dashboard",
+                Component: Dashboard
+            },
+
+            {
+                path: "settings",
+                Component: Settings
+            }
+        ]
     },
 
     {
-        path: "/auth/signup",
-        Component: Signup
-    },
-
-    {
-        path: "auth/login",
-        Component: Login
+        path: "*",
+        Component: Page404
     }
 ]);
 

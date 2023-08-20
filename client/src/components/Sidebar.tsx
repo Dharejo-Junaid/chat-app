@@ -4,6 +4,7 @@ import { ChatCircleDots, Users, Phone, Gear, User, SignOut } from "@phosphor-ico
 
 import { faker } from "@faker-js/faker";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const profileMenu = [
     {
@@ -47,11 +48,11 @@ const Sidebar = () => {
                 src={logo} sx={{ width: "60px", height: "60px" }}
             />
 
-            <IconButton> <ChatCircleDots color="#080707"/> </IconButton>
+            <Link to="/dashboard"><IconButton> <ChatCircleDots color="#080707"/> </IconButton></Link>
             <IconButton> <Users color="#080707"/> </IconButton>
             <IconButton> <Phone color="#080707"/> </IconButton>
             <Divider sx={{ width: "80%" }}/>
-            <IconButton> <Gear color="#080707"/> </IconButton>
+            <Link to="/settings"><IconButton> <Gear color="#080707"/> </IconButton></Link>
 
                 <Stack spacing={3} flex={1} alignItems="center" justifyContent="end" p={4}>
                     <Switch onChange={() => { theme.palette.mode = "dark" }}/>

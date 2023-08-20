@@ -3,7 +3,7 @@ import { Link } from "@phosphor-icons/react";
 import { useState } from "react";
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import ConversationSpeedDial from "./ConversationSpeedDial";
+import ConversationSpeedDial from "./SpeedDial";
 import { Send, SentimentSatisfiedAlt } from "@mui/icons-material";
 
 const Footer = () => {

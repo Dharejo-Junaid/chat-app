@@ -1,8 +1,7 @@
 import { Box, Stack, IconButton, Typography } from "@mui/material";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useDispatch } from "react-redux";
-import { updateSidebarToContact } from "../redux/slices/app";
-import Message from "./Message";
+import { updateSidebarToContact } from "../../redux/slices/app";
 
 const StarredMessages = () => {
     const dispatch = useDispatch();

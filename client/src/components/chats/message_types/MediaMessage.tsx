@@ -1,5 +1,5 @@
 import { Stack, Typography, useTheme } from "@mui/material";
-import MessageOptions from "../MessageOptions";
+import MessageOptions from "../conversation/MessageOptions";
 
 const MediaMessage = ({ message, img, incoming }: any) => {
 

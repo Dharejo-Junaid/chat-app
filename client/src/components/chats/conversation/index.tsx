@@ -5,7 +5,7 @@ import Messages from "./Messages";
 
 const Conversation = () => {
     return (
-        <Stack width="100%" maxHeight="100%">
+        <Stack flexGrow={1} height="100%">
             <Header />
             <Messages />
             <Footer />

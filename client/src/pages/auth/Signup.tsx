@@ -1,4 +1,4 @@
-import { Button, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -26,9 +26,8 @@ const Signup = () => {
     }
 
     return (
-        <Stack height="100vh" justifyContent="center" alignItems="center">
-        <Paper elevation={8} sx={{ padding: "32px" }}>
-            <Typography variant="h5" m="16px" align="center">Get Started with Twak</Typography>
+        <>
+            <Typography variant="h5" m="16px" align="center">Get Started with Pied Piper</Typography>
             
             <form onSubmit={handleSubmit}>
                 <Stack spacing={3} width="450px">
@@ -43,8 +42,7 @@ const Signup = () => {
                     </Typography>
                 </Stack>
             </form>
-        </Paper>
-        </Stack>
+        </>
     );
 }
 

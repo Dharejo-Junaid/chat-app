@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import MessageOptions from "../MessageOptions";
+import MessageOptions from "../conversation/MessageOptions";
 
 const ReplyMessage = ({ reply, message, incoming }: any) => {
     return (

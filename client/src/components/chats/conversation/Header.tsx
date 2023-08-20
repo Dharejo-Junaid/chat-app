@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Stack, Avatar, Typography, IconButton } from "@mui/material";
 import { Phone, VideoCamera, CaretDown } from "@phosphor-icons/react";
 import { useDispatch } from "react-redux";
-import { toggleSidebar } from "../../redux/slices/app";
+import { toggleSidebar } from "../../../redux/slices/app";
 
 const Header = () => {
 

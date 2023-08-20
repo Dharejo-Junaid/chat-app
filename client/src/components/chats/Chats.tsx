@@ -1,5 +1,5 @@
 import { Typography, Stack, IconButton } from "@mui/material";
-import Searchbar from "../Searchbar";
+import Searchbar from "./Searchbar";
 import { ChatList } from "../../contents/data";
 import ChatElement from "./ChatElement";
 import { CircleDashed } from "@phosphor-icons/react";
@@ -11,7 +11,7 @@ const Chats = () => {
             p="12px"
             maxHeight="100%"
             minWidth="300px"
-            maxWidth="3000px"
+            maxWidth="300px"
             sx={{ 
                 backgroundColor: "#F8FAFF",
                 overflowY: "scroll"
