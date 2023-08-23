@@ -1,12 +1,12 @@
 import { Stack } from "@mui/system";
-import ChatsList from "../../components/chats/ChatsList";
-import Conversation from "../../components/chats/conversation";
-import Contact from "../../components/chats/Contact";
+import ChatsList from "../../components/chat/ChatsList";
+import Conversation from "../../components/chat/conversation";
+import Contact from "../../components/chat/Contact";
 import { useSelector } from "react-redux";
-import SharredMessages from "../../components/chats/SharredMessages";
-import StarredMessages from "../../components/chats/StarredMessages";
+import SharredMessages from "../../components/chat/SharredMessages";
+import StarredMessages from "../../components/chat/StarredMessages";
 
-const Dashboard = () => {
+const Chat = () => {
 
     const sidebar = useSelector((state: any) => state.app.sidebar);
 
@@ -27,4 +27,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default Chat;

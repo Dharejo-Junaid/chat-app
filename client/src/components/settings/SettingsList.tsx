@@ -47,15 +47,14 @@ const SettingsList = () => {
             width="270px"
             bgcolor="#F8FAFF"
             boxShadow="0 0 2px rgba(0, 0, 0, 0.25)"
-            p={3}
             maxHeight="100%"
         >
-            <Stack direction="row" spacing={2} alignItems="center">
+            <Stack direction="row" alignItems="center" pt={1.5}>
                 <IconButton><CaretLeft color="black"/></IconButton>
                 <Typography variant="h6">Settings</Typography>
             </Stack>
 
-            <Stack direction="row" alignItems="center" spacing={1.5} py={2}>
+            <Stack direction="row" alignItems="center" spacing={1.5} p={3}>
                 <Avatar
                     src={faker.image.avatar()}
                     alt={faker.name.firstName()}
@@ -74,7 +73,7 @@ const SettingsList = () => {
                 settingsList.map( ({key, icon, title}: any) => {
                     return (
                         <>
-                            <Stack key={key} direction="row" spacing={2.5} paddingTop={2.5} paddingBottom={1.5} sx={{
+                            <Stack key={key} direction="row" spacing={2.5} p={2} paddingTop={2.5} paddingBottom={1.5} sx={{
                                 ":hover": {
                                     cursor: "pointer"
                                 }

@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import GroupsList from "../../components/groups/GroupsList";
+import GroupsList from "../../components/group/GroupsList";
 
 const Groups = () => {
     return (

@@ -1,5 +1,5 @@
 import { Stack, Typography, useTheme } from "@mui/material";
-import MessageOptions from "../chats/conversation/MessageOptions";
+import MessageOptions from "../chat/conversation/MessageOptions";
 
 const MediaMessage = ({ message, img, incoming }: any) => {
 

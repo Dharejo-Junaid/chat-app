@@ -3,8 +3,16 @@ import Searchbar from "../Searchbar";
 import { Plus } from "@phosphor-icons/react";
 import ChatElement from "../ChatElement";
 import { ChatList } from "../../contents/data";
+import { useState } from "react";
+import CreateNewGroupDialog from "./CreateNewGroupDialog";
 
 const GroupsList = () => {
+
+    const [ openDialog, setOpenDialog ] = useState(false);
+
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+    }
 
     return (
         <Stack 
@@ -16,13 +24,14 @@ const GroupsList = () => {
                 backgroundColor: "#F8FAFF",
                 overflowY: "scroll"
             }}
-            spacing={1}
+            spacing={2}
         >
             <Typography variant="h6" m={2}>Groups</Typography>
 
             <Searchbar />
 
-            <Button size="small"
+            <Button
+                onClick={() => setOpenDialog((prev) => !prev)}
                 sx={{ display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -33,7 +42,7 @@ const GroupsList = () => {
                 >
                     Create Group
                 </Typography>
-                <IconButton><Plus size={16} color="black"/></IconButton>
+                <Plus size={16} color="#080707"/>
             </Button>
 
             <Divider />
@@ -47,6 +56,9 @@ const GroupsList = () => {
                 }
             </Stack>
 
+            {
+                openDialog && <CreateNewGroupDialog open={openDialog} hanldeClose={handleDialogClose}/>
+            }
 
         </Stack>
     );
