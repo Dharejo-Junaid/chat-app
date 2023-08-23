@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Avatar, Divider, IconButton, Stack, Typography } from "@mui/material";
-import { CaretLeft, LockOpen, Notification } from "@phosphor-icons/react";
+import { CaretLeft, ClipboardText, Key, Notification, PencilCircle, WarningCircle, Lock, Image } from "@phosphor-icons/react";
 
 const settingsList = [
     {
@@ -10,32 +10,32 @@ const settingsList = [
     },
     {
         key: "privacy_setting",
-        icon: <LockOpen size={20} color="black"/>,
+        icon: <Lock size={20} color="black"/>,
         title: "Privacy"
     },
     {
         key: "security_setting",
-        icon: <Notification size={20} color="black"/>,
+        icon: <Key size={20} color="black"/>,
         title: "Security"
     },
     {
         key: "theme-setting",
-        icon: <Notification size={20} color="black"/>,
+        icon: <PencilCircle size={20} color="black"/>,
         title: "Theme"
     },
     {
         key: "chat_wallpaper_setting",
-        icon: <Notification size={20} color="black"/>,
+        icon: <Image size={20} color="black"/>,
         title: "Chat Wallpaper"
     },
     {
         key: "account_info_setting",
-        icon: <Notification size={20} color="black"/>,
+        icon: <ClipboardText size={20} color="black"/>,
         title: "Account Info"
     },
     {
         key: "help_setting",
-        icon: <Notification size={20} color="black"/>,
+        icon: <WarningCircle size={20} color="black"/>,
         title: "Help"
     },
     
@@ -74,7 +74,11 @@ const SettingsList = () => {
                 settingsList.map( ({key, icon, title}: any) => {
                     return (
                         <>
-                            <Stack key={key} direction="row" spacing={2.5} paddingTop={2.5} paddingBottom={1.5}>
+                            <Stack key={key} direction="row" spacing={2.5} paddingTop={2.5} paddingBottom={1.5} sx={{
+                                ":hover": {
+                                    cursor: "pointer"
+                                }
+                            }}>
                                 {icon}
                                 <Typography variant="body2">{title}</Typography>
                             </Stack>

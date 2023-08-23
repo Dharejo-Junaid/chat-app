@@ -9,7 +9,7 @@ const StarredMessages = () => {
     return (
         <Box
             minWidth="300px"
-            maxWidth="3000px"
+            maxWidth="300px"
             height="100vh"
             display="flex"
             flexDirection="column"

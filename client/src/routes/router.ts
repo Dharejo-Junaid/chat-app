@@ -7,7 +7,8 @@ import AuthLayout from "../layouts/Auth";
 import DashboardLayout from "../layouts/Dashboard";
 import Settings from "../pages/dashboard/Settings";
 import Page404 from "../pages/Page404";
-import Dashboard from "../pages/dashboard/Dashboard";
+import Dashboard from "../pages/dashboard/Chats";
+import Groups from "../pages/dashboard/Groups";
 
 const router = createBrowserRouter([
 
@@ -42,8 +43,13 @@ const router = createBrowserRouter([
         Component: DashboardLayout,
         children: [
             {
-                path: "dashboard",
+                path: "chats",
                 Component: Dashboard
+            },
+
+            {
+                path: "groups",
+                Component: Groups
             },
 
             {

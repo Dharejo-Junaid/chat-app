@@ -1,10 +1,10 @@
 import { Typography, Stack, IconButton } from "@mui/material";
-import Searchbar from "./Searchbar";
+import Searchbar from "../Searchbar";
 import { ChatList } from "../../contents/data";
-import ChatElement from "./ChatElement";
+import ChatElement from "../ChatElement";
 import { CircleDashed } from "@phosphor-icons/react";
 
-const Chats = () => {
+const ChatsList = () => {
 
     return (
         <Stack 
@@ -36,4 +36,4 @@ const Chats = () => {
     );
 }
 
-export default Chats;
+export default ChatsList;

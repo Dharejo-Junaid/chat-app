@@ -48,8 +48,8 @@ const Sidebar = () => {
                 src={logo} sx={{ width: "60px", height: "60px" }}
             />
 
-            <Link to="/dashboard"><IconButton> <ChatCircleDots color="#080707"/> </IconButton></Link>
-            <IconButton> <Users color="#080707"/> </IconButton>
+            <Link to="/chats"><IconButton> <ChatCircleDots color="#080707"/> </IconButton></Link>
+            <Link to="/groups"> <IconButton> <Users color="#080707"/> </IconButton></Link>
             <IconButton> <Phone color="#080707"/> </IconButton>
             <Divider sx={{ width: "80%" }}/>
             <Link to="/settings"><IconButton> <Gear color="#080707"/> </IconButton></Link>

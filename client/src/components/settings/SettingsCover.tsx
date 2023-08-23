@@ -1,17 +1,15 @@
 import { Stack } from "@mui/material";
+import Settings from "../../assets/settings.svg";
 
 const SettingsCover = () => {
     return (
         <Stack
             flexGrow={1}
             height="100%"
-            bgcolor="lightcyan"
             alignItems="center"
             justifyContent="center"
         >
-            <Stack width="250px" height="250px" bgcolor="red">
-                
-            </Stack>
+            <img src={Settings} alt="Settings" />
         </Stack>
     );
 }

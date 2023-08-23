@@ -1,5 +1,5 @@
 import { Stack } from "@mui/system";
-import Chats from "../../components/chats/Chats";
+import ChatsList from "../../components/chats/ChatsList";
 import Conversation from "../../components/chats/conversation";
 import Contact from "../../components/chats/Contact";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     return (
         <Stack direction="row" flexGrow={1} height="100vh">
-            <Chats />
+            <ChatsList />
             <Conversation />
             {
                 sidebar.open && (() => {

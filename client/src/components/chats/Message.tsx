@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material"
 
 import { Chat_History } from "../../contents/data";
-import { TimeLine, MediaMessage, DocumentMessage, ReplyMessage, TextMessage } from "./message_types"
+import { TimeLine, MediaMessage, DocumentMessage, ReplyMessage, TextMessage } from "../message_types"
 
 const Message = () => {
 
