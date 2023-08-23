@@ -10,6 +10,7 @@ import Page404 from "../pages/Page404";
 import Chat from "../pages/dashboard/Chat";
 import Group from "../pages/dashboard/Group";
 import Call from "../pages/dashboard/Call";
+import Profile from "../pages/dashboard/Profile";
 
 const router = createBrowserRouter([
 
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
             {
                 path: "call",
                 Component: Call
+            },
+
+            {
+                path: "profile",
+                Component: Profile
             },
 
             {

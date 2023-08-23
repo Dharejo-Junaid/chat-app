@@ -4,7 +4,7 @@ import { ChatCircleDots, Users, Phone, Gear, User, SignOut } from "@phosphor-ico
 
 import { faker } from "@faker-js/faker";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const profileMenu = [
     {
@@ -21,11 +21,21 @@ const profileMenu = [
     },
 ];
 
+const getUrlPath = (idx: number) => {
+    switch(idx) {
+        case 0: return "/profile";
+        case 1: return "/settings";
+        case 2: return "/auth/login"
+        default: return "";
+    }
+}
+
 const Sidebar = () => {
 
     const theme = useTheme();
     const [ anchorEl, setAnchorEl ] = useState<any>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
     
     const handleOpen = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -33,6 +43,12 @@ const Sidebar = () => {
 
     const handleClose = () => {
         setAnchorEl(null);
+    }
+
+    const HandleMenuItem = (idx: number) => {
+        setAnchorEl(null);
+        const path = getUrlPath(idx);
+        navigate(path);
     }
     
     return (
@@ -43,6 +59,7 @@ const Sidebar = () => {
             boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)"
         }}>
         
+            
             <Avatar 
                 variant="rounded"
                 src={logo} sx={{ width: "60px", height: "60px" }}
@@ -65,9 +82,9 @@ const Sidebar = () => {
                         onClose={handleClose}
                     >
                         {
-                            profileMenu.map(({ title, icon }: any) => {
+                            profileMenu.map(({ title, icon }: any, idx) => {
                                 return (
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={() => HandleMenuItem(idx)}>
                                         <Stack
                                             direction="row"
                                             width="100px"
