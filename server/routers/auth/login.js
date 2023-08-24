@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { userLogin } = require("../../controller/login");
+const { userLogin } = require("../../controllers/login");
 const cookieParser = require("cookie-parser");
 
 router.use(cookieParser());

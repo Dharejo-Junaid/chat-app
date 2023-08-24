@@ -1,25 +1,24 @@
-const User = require("../model/User");
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { compare } = require("bcrypt");
-
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const userLogin = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if(!username || !password) {
+    if(!email || !password) {
         return res.json({
             satus: "fail",
             message: "username and password are required"
         });
     }
 
-    const user = await User.findOne({username});
+    const user = await User.findOne({email});
     if(! user) {
         return res.json({
             status: "fail",
-            message: `${username} does not exists`
+            message: "Account does not exists"
         });
     }
 
@@ -42,7 +41,8 @@ const userLogin = async (req, res) => {
 
     res.cookie("token", `Bearer ${token}`, { expiresIn: "15m", httpOnly: true })
     .json({
-        status: "success"
+        status: "success",
+        message: "Loged in successfully"
     });
 }
 

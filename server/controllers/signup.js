@@ -1,4 +1,4 @@
-const User = require("../model/User");
+const User = require("../models/user");
 const { hash } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../helper/sendEmail");
@@ -6,30 +6,24 @@ const { sendEmail } = require("../helper/sendEmail");
 const JWT_PRIVATE_KEY = process.env.JWT_SECRET;
 
 const createAccount = async (req, res) => {
+
     const { username, email, password } = req.body;
-    console.log(username, email, password);
+    console.log("username, email, password = ", username, email, password);
     
     if(!username || !email || !password) {
         return res.json({
-            status: "fail"
+            status: "fail",
+            message: "username, email and password is required"
         });
     }
 
-    // if username || email exists;
-    let user = await User.findOne({$or: [ {username}, {email} ]}, { username, email: true });
-    console.log(user);
+    // if email exists;
+    let user = await User.findOne({email}, { email: true });
+    console.log("User found = ", user);
     if(user) {
-
-        if(user.email === email) {
-            return res.json({
-                status: "fail",
-                message: "Account already exist"
-            });
-        }
-
         return res.json({
             status: "fail",
-            message: `${username} is not available`
+            message: "Account already exists"
         });
     }
 
@@ -37,7 +31,7 @@ const createAccount = async (req, res) => {
     const hashPassword = await hash(password, 10);
 
     const newUser = await User.create({
-        username, email, password: hashPassword, isVerified: false
+        username, email, password: hashPassword, isVerified: true
     });
 
     const { _id } = newUser;
@@ -45,6 +39,9 @@ const createAccount = async (req, res) => {
 
     const isSent = await sendEmail(email, token);
     if(! isSent) {
+
+        console.log("Delete = ", await User.findByIdAndDelete(_id));
+
         res.json({
             status: "fail",
             message: "Issue in create your account"
@@ -53,7 +50,7 @@ const createAccount = async (req, res) => {
 
     res.json({
         status: "success",
-        message: "Account has been created succressfully"
+        message: "Account has been created succressfully,\nPlease verify your email"
     });
 }
 

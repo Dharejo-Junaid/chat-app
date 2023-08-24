@@ -1,22 +1,26 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
-const signupRoute = require("./routes/auth/signup");
-const loginRoute = require("./routes/auth/login");
+const signupRouter = require("./routers/auth/signup");
+const loginRouter = require("./routers/auth/login");
+const resetpassword = require("./routers/auth/resetpassword");
 
 const port = process.env.PORT || 5000;
 const URI = process.env.MONGODB_URI;
 
 app.use(express.json());
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    credentials: true
+}));
 
-app.use("/auth/signup", signupRoute);
-app.use("/auth/login", loginRoute);
-
-app.get("/", (req, res) => {
-    res.send("Hello: This is server");
-});
+app.use("/auth/signup", signupRouter);
+app.use("/auth/login", loginRouter);
+app.use("/auth/resetpassword", resetpassword);
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
 .then( () => {

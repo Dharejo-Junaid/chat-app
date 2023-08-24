@@ -9,7 +9,6 @@ const Auth = () => {
                 <Outlet />
             </Paper>
         </Stack>
-    
     )
 }
 
