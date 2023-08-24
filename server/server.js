@@ -6,12 +6,14 @@ require("dotenv").config();
 
 const signupRouter = require("./routers/auth/signup");
 const loginRouter = require("./routers/auth/login");
-const resetpassword = require("./routers/auth/resetpassword");
+const resetpasswordRouter = require("./routers/auth/resetpassword");
+const forgetpasswordRouter = require("./routers/auth/forgetpassword");
+const verifyRouter = require("./routers/auth/verify");
 
 const port = process.env.PORT || 5000;
-const URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-app.use(express.json());
+app.use("/auth", express.json());
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
@@ -20,9 +22,11 @@ app.use(cors({
 
 app.use("/auth/signup", signupRouter);
 app.use("/auth/login", loginRouter);
-app.use("/auth/resetpassword", resetpassword);
+app.use("/auth/resetpassword", resetpasswordRouter);
+app.use("/auth/forgetpassword", forgetpasswordRouter);
+app.use("/auth/verify", verifyRouter);
 
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 .then( () => {
     console.log("Database connected...");
 

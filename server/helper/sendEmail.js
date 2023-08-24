@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const verificationHtml = require("../views/verificationHtml");
 
 const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL;
 const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD;
@@ -13,15 +14,12 @@ const sendEmail = async (email, token) => {
                 pass: NODEMAILER_PASSWORD
             }
         });
-
+        
         const res = await transporter.sendMail({
             from: NODEMAILER_EMAIL,
             to: email,
             subject: "Verification Email",
-            html: `
-                <h1>Click me !!!</h1>
-                ${token}
-            `
+            html: verificationHtml(`http://localhost:5000/auth/verify/${token}`)
         });
 
         return true;
@@ -29,9 +27,9 @@ const sendEmail = async (email, token) => {
 
     catch(err) {
         return false;
-    }
-
-    
+    } 
 }
+
+// Thank you for verifying your email address with Pied Piper.
 
 module.exports = { sendEmail };

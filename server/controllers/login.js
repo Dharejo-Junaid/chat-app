@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { compare } = require("bcrypt");
+const { sendEmail } = require("../helper/sendEmail");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -29,15 +30,21 @@ const userLogin = async (req, res) => {
         });
     }
 
+    // generate token;
+    const { _id } = user;
+    const token = jwt.sign({ _id }, JWT_SECRET, { expiresIn: "15m" });
+
     if(! user.isVerified) {
+
+        await sendEmail(user.email, token);
+
         return res.json({
             status: "fail",
             message: "Account is not verified"
         });
     }
 
-    const { _id } = user;
-    const token = await jwt.sign({ _id }, JWT_SECRET, { expiresIn: "15m" });
+    
 
     res.cookie("token", `Bearer ${token}`, { expiresIn: "15m", httpOnly: true })
     .json({

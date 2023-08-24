@@ -31,16 +31,18 @@ const createAccount = async (req, res) => {
     const hashPassword = await hash(password, 10);
 
     const newUser = await User.create({
-        username, email, password: hashPassword, isVerified: true
+        username, email, password: hashPassword, isVerified: false
     });
 
+    // generate token;
     const { _id } = newUser;
-    const token = await jwt.sign({id: _id}, JWT_PRIVATE_KEY, { expiresIn: "15m" });
+    const token = jwt.sign({ _id }, JWT_PRIVATE_KEY, { expiresIn: "1d" });
 
+    // send email
     const isSent = await sendEmail(email, token);
-    if(! isSent) {
 
-        console.log("Delete = ", await User.findByIdAndDelete(_id));
+    if(! isSent) {    
+        await User.findByIdAndDelete(_id);
 
         res.json({
             status: "fail",
