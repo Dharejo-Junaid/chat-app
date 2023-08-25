@@ -1,4 +1,6 @@
-const forgetPasswordMail = (url) => {
+// url => http://localhost:5173/auth/resetpassword/:token
+
+const resetPasswordHtml = (url) => {
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -43,41 +45,42 @@ const forgetPasswordMail = (url) => {
             display: inline-block;
             padding: 10px 20px;
             background-color: #007bff;
-            color: #ffffff;
+            color: #ffffff; /* Change link text color to white */
             text-decoration: none;
             border-radius: 5px;
         }
         /* Dark mode styles */
         @media (prefers-color-scheme: dark) {
             body {
-            background-color: #333;
-            color: #eee;
+                background-color: #333;
+                color: #eee;
             }
             .container {
-            background-color: #444;
+                background-color: #444;
             }
             .message a {
-            background-color: #007bff;
+                background-color: #007bff;
+                font-size: 50px;
             }
         }
         </style>
         </head>
         <body>
         <div class="container">
-            <div class="header">
+        <div class="header">
             <div class="logo">
-                <img src="../views/logo.png" alt="Pied Piper Logo">
+            <img src="../views/logo.png" alt="Pied Piper Logo">
             </div>
             <h2>Forgot Password</h2>
             <p>If you've forgotten your password, click the button below to reset it.</p>
-            </div>
-            <div class="message">
-            <a href="${url}" class="reset-button">Reset Password</a>
-            </div>
+        </div>
+        <div class="message">
+            <a href="${url}"> <button class="reset-button">Reset Password </button> </a>
+        </div>
         </div>
         </body>
-        </html>    
+        </html>
     `;
 }
 
-module.exports = { forgetPasswordMail };
+module.exports = resetPasswordHtml;

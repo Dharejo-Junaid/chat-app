@@ -1,19 +1,21 @@
 const nodemailer = require("nodemailer");
 const verificationHtml = require("../views/verificationHtml");
+const resetPasswordHtml = require("../views/resetPasswordHtml");
 
 const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL;
 const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD;
 
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: NODEMAILER_EMAIL,
+        pass: NODEMAILER_PASSWORD
+    }
+});
+
 const sendEmail = async (email, token) => {
     
     try{
-        const transporter = nodemailer.createTransport({
-            service: "Gmail",
-            auth: {
-                user: NODEMAILER_EMAIL,
-                pass: NODEMAILER_PASSWORD
-            }
-        });
         
         const res = await transporter.sendMail({
             from: NODEMAILER_EMAIL,
@@ -30,6 +32,22 @@ const sendEmail = async (email, token) => {
     } 
 }
 
-// Thank you for verifying your email address with Pied Piper.
+const sendResetPasswordEmail = async (email, token) => {
+    try{
+        
+        const res = await transporter.sendMail({
+            from: NODEMAILER_EMAIL,
+            to: email,
+            subject: "Reset your password",
+            html: resetPasswordHtml(`http://localhost:5173/auth/resetpassword/${token}`)
+        });
 
-module.exports = { sendEmail };
+        return true;
+    }
+
+    catch(err) {
+        return false;
+    } 
+}
+
+module.exports = { sendEmail, sendResetPasswordEmail };

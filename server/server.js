@@ -13,6 +13,8 @@ const verifyRouter = require("./routers/auth/verify");
 const port = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
+app.use(express.static("./views"));
+
 app.use("/auth", express.json());
 app.use(cors({
     origin: "*",
