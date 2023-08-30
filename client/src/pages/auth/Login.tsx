@@ -2,11 +2,13 @@ import { Button, Stack, TextField, Typography, Link, CircularProgress } from "@m
 import axios from "axios";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { showMessage } from "../../redux/slices/snackbar";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
 
     const [ loading, setLoading ] = useState(false);
-    const [ message, setMessage ] = useState("");
+    const dispatch = useDispatch();
 
     const [ user, setUser ] = useState({
         email: "",
@@ -28,8 +30,9 @@ const Login = () => {
         setLoading(true);
 
         const res = await axios.post("http://localhost:5000/auth/login", user);
-        console.log(res.data);
-        setMessage(res.data.message);
+        const { status, message } = res.data;
+        const type = status==="success"? "success" : "error";
+        dispatch(showMessage<any>({ message, type}));
 
         setLoading(false);
     }
@@ -37,7 +40,6 @@ const Login = () => {
     return (
         <>
             <Typography variant="h5" m="16px" align="center">Welcome on Pied Piper</Typography>
-            <Typography variant="subtitle1" m="16px" align="center">{message}</Typography>
             
             <form onSubmit={handleSubmit}>
                 <Stack spacing={3} width="450px">

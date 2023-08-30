@@ -10,23 +10,19 @@ const createAccount = async (req, res) => {
     const { username, email, password } = req.body;
     console.log("username, email, password = ", username, email, password);
     
-    if(!username || !email || !password) {
-        return res.json({
-            status: "fail",
-            message: "username, email and password is required"
-        });
-    }
+    if(!username || !email || !password) return res.json({
+        status: "fail",
+        message: "username, email and password is required"
+    });
 
     // if email exists;
     let user = await User.findOne({email}, { email: true });
     console.log("User found = ", user);
-    if(user) {
-        return res.json({
-            status: "fail",
-            message: "Account already exists"
-        });
-    }
-
+    if(user) return res.json({
+        status: "fail",
+        message: "Account already exists"
+    });
+    
     // creating hash of the password to store in database;
     const hashPassword = await hash(password, 10);
 
@@ -44,7 +40,7 @@ const createAccount = async (req, res) => {
     if(! isSent) {    
         await User.findByIdAndDelete(_id);
 
-        res.json({
+        return res.json({
             status: "fail",
             message: "Issue in create your account"
         });

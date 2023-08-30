@@ -1,13 +1,14 @@
-import { LoadingButton } from "@mui/lab";
 import { Button, CircularProgress, Stack, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { showMessage } from "../../redux/slices/snackbar";
 
 const Signup = () => {
 
-    const [ message, setMessage ] = useState("");
     const [ loading, setLoading ] = useState(false);
+    const dispatch = useDispatch();
 
     const [ user, setUser ] = useState({
         username: "",
@@ -29,14 +30,16 @@ const Signup = () => {
         event.preventDefault();
         setLoading(true);
         const res = await axios.post("http://localhost:5000/auth/signup", user);
-        setMessage(() => res.data.message);
+        const { status, message } = res.data;
+        const type = status==="success"? "success" : "error";
+        dispatch(showMessage<any>({ message, type}));
+
         setLoading(false);
     }
 
     return (
         <>
             <Typography variant="h5" m="16px" align="center">Get Started with Pied Piper</Typography>
-            <Typography variant="subtitle1" m="16px" align="center">{message}</Typography>
 
             <form onSubmit={handleSubmit}>
                 <Stack spacing={3} width="450px">

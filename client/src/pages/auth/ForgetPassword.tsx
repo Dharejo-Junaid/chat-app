@@ -3,11 +3,14 @@ import { CaretLeft } from "@phosphor-icons/react";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { showMessage } from "../../redux/slices/snackbar";
+import { useDispatch } from "react-redux";
 
 const ForgetPassword = () => {
 
     const [ loading, setLoading ] = useState(false);
     const [ email, setEmail ] = useState("");
+    const dispatch = useDispatch();
 
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -18,11 +21,9 @@ const ForgetPassword = () => {
         setLoading(true);
 
         const res = await axios.post("http://localhost:5000/auth/forgetpassword", {email});
-        const { data } = res;
-
-        console.log(res);
-        
-        console.log("data = ", data);
+        const { status, message } = res.data;
+        const type = status==="success"? "success" : "error";
+        dispatch(showMessage<any>({ message, type}));
 
         setLoading(false);
     }
