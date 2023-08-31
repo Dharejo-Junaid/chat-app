@@ -1,6 +1,6 @@
 import { Box, Stack, IconButton, Typography, Tabs, Tab, ImageList, ImageListItem, Paper, Divider } from "@mui/material";
 import { ArrowLeft, DownloadSimple, File } from "@phosphor-icons/react";
-import { updateSidebarToContact } from "../../redux/slices/app";
+import { changeType } from "../../redux/slices/sidebar";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { faker } from "@faker-js/faker";
@@ -36,7 +36,7 @@ const SharredMessages = () => {
                 boxShadow="0 0 2px rgba(0, 0, 0, 0.25)"
                 sx={{ backgroundColor: "#F8FAFF" }}
             >
-                <IconButton onClick={ () => dispatch(updateSidebarToContact()) }>
+                <IconButton onClick={ () => dispatch(changeType<any>("CONTACT")) }>
                     <ArrowLeft color="#4B4B4B"/>
                 </IconButton>
                 <Typography variant="subtitle1">Sharred Messages</Typography>

@@ -1,9 +1,13 @@
 import { Button, Stack, TextField, Typography, Link } from "@mui/material";
 import { CaretLeft } from "@phosphor-icons/react";
+import axios from "axios";
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 const ResetPassword = () => {
+
+    const { token } = useParams();
+    console.log("token = ", token);
 
     const [ password, setPassword ] = useState({
         newPassword: "",
@@ -17,9 +21,12 @@ const ResetPassword = () => {
         });
     }
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        console.log({ ...password });
+        const res = await axios.post("http://localhost:5000/auth/resetpassword", { token: "bearer jhSVGUXFgshgfbhdbxjhfbj", password: password.newPassword });
+
+        console.log(res.data);
+        
     }
 
     return (

@@ -24,7 +24,6 @@ const forgetpassword = async (req, res) => {
     _id = String(_id);
 
     const token = sign({_id}, JWT_SECRET, { expiresIn: "2d" });
-    
     const isSent = await sendResetPasswordEmail(email, token);
     if(!isSent) return res.json({
         status: "fail",

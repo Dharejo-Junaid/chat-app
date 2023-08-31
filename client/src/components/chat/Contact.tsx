@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Stack, Switch, Typography } from "@mui/material";
 import { Bell, CaretRight, FlagBanner, Phone, Star, Trash, VideoCamera, XCircle } from "@phosphor-icons/react";
 import { useDispatch } from "react-redux";
-import { toggleSidebar, updateSidebarToSharredMessage, updateSidebarToStarredMessages } from "../../redux/slices/app";
+import { toggleSidebar, changeType } from "../../redux/slices/sidebar";
 import { useState } from "react";
 
 const Contact = () => {
@@ -92,7 +92,7 @@ const Contact = () => {
                     <Button
                         size="small"
                         endIcon={<CaretRight />}
-                        onClick={() => dispatch(updateSidebarToSharredMessage())}
+                        onClick={() => dispatch(changeType<any>("SHARRED_MESSAGES"))}
                     >
                         401
                     </Button>
@@ -116,7 +116,7 @@ const Contact = () => {
                         <Star size={20}/>
                         <Typography variant="caption">Starred Messages</Typography>
                     </Stack>
-                    <IconButton size="small" onClick={() => dispatch(updateSidebarToStarredMessages())}>
+                    <IconButton size="small" onClick={() => dispatch(changeType<any>("STARRED_MESSAGES"))}>
                         <CaretRight color="black"/>
                     </IconButton>
                 </Stack>

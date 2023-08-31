@@ -44,9 +44,7 @@ const userLogin = async (req, res) => {
         });
     }
 
-    
-
-    res.cookie("token", `Bearer ${token}`, { expiresIn: "15m", httpOnly: true })
+    res.cookie("token", token, { expiresIn: "15m", httpOnly: true })
     .json({
         status: "success",
         message: "Loged in successfully"

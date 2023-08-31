@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const verificationHtml = require("../views/verificationHtml");
 const resetPasswordHtml = require("../views/resetPasswordHtml");
+const { urlencoded } = require("express");
 
 const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL;
 const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD;
@@ -34,7 +35,6 @@ const sendEmail = async (email, token) => {
 
 const sendResetPasswordEmail = async (email, token) => {
     try{
-        
         const res = await transporter.sendMail({
             from: NODEMAILER_EMAIL,
             to: email,

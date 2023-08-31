@@ -1,7 +1,7 @@
 import { Box, Stack, IconButton, Typography } from "@mui/material";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useDispatch } from "react-redux";
-import { updateSidebarToContact } from "../../redux/slices/app";
+import { changeType } from "../../redux/slices/sidebar";
 
 const StarredMessages = () => {
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const StarredMessages = () => {
                 boxShadow="0 0 2px rgba(0, 0, 0, 0.25)"
                 sx={{ backgroundColor: "#F8FAFF" }}
             >
-                <IconButton onClick={ () => dispatch(updateSidebarToContact()) }>
+                <IconButton onClick={ () => dispatch(changeType<any>("CONTACT")) }>
                     <ArrowLeft color="#4B4B4B"/>
                 </IconButton>
                 <Typography variant="subtitle1">Starred Messages</Typography>

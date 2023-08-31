@@ -8,7 +8,7 @@ import StarredMessages from "../../components/chat/StarredMessages";
 
 const Chat = () => {
 
-    const sidebar = useSelector((state: any) => state.app.sidebar);
+    const sidebar = useSelector((state: any) => state.sidebar);
 
     return (
         <Stack direction="row" flexGrow={1} height="100vh">
