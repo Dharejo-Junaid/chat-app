@@ -1,7 +1,7 @@
 import { Button, Stack, TextField, Typography, Link, CircularProgress } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { showMessage } from "../../redux/slices/snackbar";
 import { useDispatch } from "react-redux";
 
@@ -9,6 +9,8 @@ const Login = () => {
 
     const [ loading, setLoading ] = useState(false);
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const [ user, setUser ] = useState({
         email: "",
@@ -35,6 +37,9 @@ const Login = () => {
         dispatch(showMessage<any>({ message, type}));
 
         setLoading(false);
+        if(status === "success") {
+            navigate("/chat");
+        }
     }
 
     return (

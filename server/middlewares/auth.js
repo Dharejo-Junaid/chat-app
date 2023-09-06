@@ -6,7 +6,11 @@ const auth = async (req, res, next) => {
     
     try {
         if(req.cookies?.token) {
-            if(token && jwt.verify(token, JWT_SECRET) ) {
+
+            const { _id } = jwt.verify(token, JWT_SECRET);
+
+            if(token &&  _id) {
+                req._id = _id;
                 return next();
             }
         }

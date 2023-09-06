@@ -25,7 +25,18 @@ const User = new Schema({
 
     isVerified: {
         type: Boolean
-    }
+    },
+
+    socket_id: {
+        type: String
+    },
+
+    friends: [
+        {
+            type: Schema.ObjectId,
+            ref: "User"
+        }
+    ]
 });
 
 module.exports = model("User", User);
