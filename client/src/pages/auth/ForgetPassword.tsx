@@ -19,11 +19,15 @@ const ForgetPassword = () => {
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
+        try {
+            const res = await axios.post("http://localhost:5000/auth/forget-password", {email});
+            const { message, severity } = res.data;
+            dispatch(showMessage<any>({ message, severity}));
+        }
 
-        const res = await axios.post("http://localhost:5000/auth/forgetpassword", {email});
-        const { status, message } = res.data;
-        const type = status==="success"? "success" : "error";
-        dispatch(showMessage<any>({ message, type}));
+        catch(err: any) {
+            console.log(err);
+        }
 
         setLoading(false);
     }

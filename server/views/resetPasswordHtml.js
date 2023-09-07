@@ -69,7 +69,7 @@ const resetPasswordHtml = (url) => {
         <div class="container">
         <div class="header">
             <div class="logo">
-            <img src="../views/logo.png" alt="Pied Piper Logo">
+            <img src="${__dirname}/logo.png" alt="Pied Piper Logo">
             </div>
             <h2>Forgot Password</h2>
             <p>If you've forgotten your password, click the button below to reset it.</p>

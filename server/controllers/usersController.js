@@ -6,7 +6,7 @@ const getAllUsers = async (req, res) => {
     const allUsers = await User.find(
         { isVerified: true }, { username: true }
     );
-
+    
     const currUser = await User.findById(_id.toString());
     const friends = currUser.friends;
 

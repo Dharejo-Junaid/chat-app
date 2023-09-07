@@ -24,7 +24,8 @@ const User = new Schema({
     },
 
     isVerified: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
 
     socket_id: {

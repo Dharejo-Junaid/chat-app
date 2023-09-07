@@ -29,11 +29,15 @@ const Signup = () => {
     const handleSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
-        const res = await axios.post("http://localhost:5000/auth/signup", user);
-        const { status, message } = res.data;
-        const type = status==="success"? "success" : "error";
-        dispatch(showMessage<any>({ message, type}));
 
+        try {
+            const res = await axios.post("http://localhost:5000/auth/signup", user);
+            const { message, severity } = res.data;
+            dispatch(showMessage<any>({ message, severity }));
+        }
+        catch(err: any) {
+            console.log(err.message);
+        }
         setLoading(false);
     }
 

@@ -10,12 +10,12 @@ const Toast = () => {
     return (
         <Snackbar
             open={snackbar.open}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
             autoHideDuration={4000}
             onClose={() => dispatch(setOpen<any>({ open: false }))}
         >
             <Alert
-                severity={snackbar.type}
+                severity={snackbar.severity}
             >
                 {snackbar.message}
             </Alert>

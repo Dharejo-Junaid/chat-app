@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     open: false,
     message: "",
-    type: ""
+    severity: "",
 }
 
 const reducers = {
@@ -13,7 +13,7 @@ const reducers = {
 
     showMessage: (state: any, action: any) => {
         state.message = action.payload.message;
-        state.type = action.payload.type;
+        state.severity = action.payload.severity;
         state.open = true;
     },
 }

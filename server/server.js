@@ -2,25 +2,17 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
-const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
 const User = require("./models/user");
+require("dotenv").config();
 
-const signupRouter = require("./routers/auth/signup");
-const loginRouter = require("./routers/auth/login");
-const resetpasswordRouter = require("./routers/auth/resetpassword");
-const forgetpasswordRouter = require("./routers/auth/forgetpassword");
-const verifyRouter = require("./routers/auth/verify");
-const usersRouter = require("./routers/dashboard/users");
-
-const port = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const connectDB = require("./helper/connectDB");
+const authRouter = require("./routers/authRouter");
 
 // middlewares;
 app.use(express.static("./views"));
 
-app.use("/auth", express.json());
+app.use("/auth", [express.json()]);
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
@@ -28,12 +20,7 @@ app.use(cors({
 }));
 
 // routers;
-app.use("/auth/signup", signupRouter);
-app.use("/auth/login", loginRouter);
-app.use("/auth/resetpassword", resetpasswordRouter);
-app.use("/auth/forgetpassword", forgetpasswordRouter);
-app.use("/auth/verify", verifyRouter);
-app.use("/dashboard/users", usersRouter);
+app.use("/auth", authRouter);
 
 // sockets;
 io.on("connection", async (socket) => {
@@ -56,17 +43,4 @@ io.on("connection", async (socket) => {
     });
 });
 
-// database connection;
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-.then( () => {
-    console.log("Database connected...");
-
-    // on successfull connection of DB => server listens;
-    server.listen(port, () => {
-        console.log(`Server is listening on port: ${port}`);
-    });
-})
-.catch( (err) => {
-    console.log("Connection fail");
-    console.log(err);
-});
+connectDB(server);

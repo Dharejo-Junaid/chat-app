@@ -23,9 +23,17 @@ const ResetPassword = () => {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        const res = await axios.post("http://localhost:5000/auth/resetpassword", { token: "bearer jhSVGUXFgshgfbhdbxjhfbj", password: password.newPassword });
 
-        console.log(res.data);
+        try{
+            const res = await axios.post("http://localhost:5000/auth/reset-password", { token: "bearer jhSVGUXFgshgfbhdbxjhfbj", password: password.newPassword });
+
+            console.log(res.data);
+        }
+
+        catch(err: any) {
+            
+        }
+
         
     }
 

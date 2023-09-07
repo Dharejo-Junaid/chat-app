@@ -1,26 +1,23 @@
 const jwt = require("jsonwebtoken");
+const { verifyToken } = require("../helper/token");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const auth = async (req, res, next) => {
-    
-    try {
-        if(req.cookies?.token) {
 
-            const { _id } = jwt.verify(token, JWT_SECRET);
+    if(req.cookies?.token) {
+        const { _id } = verifyToken(token);
 
-            if(token &&  _id) {
-                req._id = _id;
-                return next();
-            }
+        if(_id) {
+            req._id = _id;
+            return next();
         }
-
-        res.redirect("/auth/login");
     }
 
-    catch(err) {
-        res.redirect("/auth/login");
-    }
+    return res.json({
+        status: "fail",
+        message: "token not found"
+    });
 }
 
 module.exports = auth;
