@@ -33,6 +33,8 @@ const Login = () => {
 
         try {
             const res = await axios.post("http://localhost:5000/auth/login", user);
+            console.log(res.data);
+            
             const { message, severity } = res.data;
             dispatch(showMessage<any>({ message, severity }));
         

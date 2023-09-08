@@ -3,24 +3,39 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const User = require("./models/user");
 require("dotenv").config();
 
+const authMiddleware = require("./middlewares/auth");
 const connectDB = require("./helper/connectDB");
 const authRouter = require("./routers/authRouter");
+const usersRouter = require("./routers/usersRouter");
 
-// middlewares;
-app.use(express.static("./views"));
-
-app.use("/auth", [express.json()]);
-app.use(cors({
-    origin: "*",
+const corsOptions = {
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true
-}));
+}
+
+// middlewares;
+app.use(cors(corsOptions));
+app.options(cors(corsOptions));
+app.use(express.static("./views"));
+
+app.use("/auth", [
+    express.json(),
+    express.urlencoded({ extended: true })
+]);
+
+app.use("/users", [
+    cookieParser(),
+    authMiddleware
+]);
 
 // routers;
 app.use("/auth", authRouter);
+app.use("/users", usersRouter);
 
 // sockets;
 io.on("connection", async (socket) => {

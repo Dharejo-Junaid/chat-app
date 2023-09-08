@@ -1,11 +1,10 @@
 const User = require("../models/user");
 const { hash, compare } = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const verificationSuccessHtml = require("../views/verificationSuccessHtml");
 const { 
     sendEmail, sendResetPasswordEmail
 } = require("../helper/sendEmail");
-const { createToken } = require("../helper/token");
+const { createToken, verifyToken } = require("../helper/token");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -147,7 +146,7 @@ const resetPassword = async (req, res) => {
     });
 
     try {
-        const verify = jwt.verify(token, JWT_SECRET);
+        const verify = verifyToken(token);
         // TODO: reset password;
         // get _id from token and change to given password;
     }
@@ -163,12 +162,11 @@ const resetPassword = async (req, res) => {
 
 const verifyAccount = async (req, res) => {
     const { token } = req.params;
+    console.log({token});
 
     // verify token and grab id;
     try{
-        const payload = verify(token, JWT_SECRET);
-        const { _id } = payload;
-
+        const { _id } = verifyToken(token);
         if(!_id) throw Error();
 
         // update user account to verified=true;

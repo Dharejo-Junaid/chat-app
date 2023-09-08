@@ -17,4 +17,4 @@ const friendRequest = new Schema({
     }
 });
 
-module.exports = module("FriendRequest", schema);
+module.exports = model("FriendRequest", friendRequest);

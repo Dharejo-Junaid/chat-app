@@ -1,7 +1,9 @@
 const User = require("../models/user");
+const FirendRequest = require("../models/friendRequest");
 
-const getAllUsers = async (req, res) => {
+const getUsers = async (req, res) => {
     const _id = req._id;
+    // const _id = "64f80bde4b71a7412ab18454";
 
     const allUsers = await User.find(
         { isVerified: true }, { username: true }
@@ -12,7 +14,7 @@ const getAllUsers = async (req, res) => {
 
     // remove our friends and user it self;
     const remUsers = allUsers.filter(
-        (user) => !friends.include(user._id) && user_id !== _id.toString()
+        (user) => !friends.includes(user._id) && user._id.toString() !== _id
     );
     
     res.json({
@@ -22,4 +24,35 @@ const getAllUsers = async (req, res) => {
     });
 }
 
-module.exports = { getAllUsers };
+const getFriends = async (req, res) => {
+    const _id = req._id;
+    // const _id = "64f80bde4b71a7412ab18454";
+
+    const currUser = await User.findById(_id.toString())
+        .populate("friends").select("_id username email");
+
+    res.json({
+        status: "success",
+        data: currUser.friends,
+        message: "users found successfully"
+    });
+}
+
+const getRequests = async (req, res) => {
+    const _id = req._id;
+    // const _id = "64f80bde4b71a7412ab18454";
+
+    const allRequests = await FirendRequest.find(
+        { recipient: _id }, { sender: true, createdAt: true }
+    );
+    
+    res.json({
+        status: "success",
+        data: allRequests,
+        message: "users found successfully"
+    });
+}
+
+
+
+module.exports = { getUsers, getFriends, getRequests };
