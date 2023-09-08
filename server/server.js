@@ -1,7 +1,6 @@
 const cors = require("cors");
 const corsOptions = {
     origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true
 }
 
@@ -12,8 +11,9 @@ const io = require("socket.io")(server, {
     cors: corsOptions
 });
 const cookieParser = require("cookie-parser");
-const User = require("./models/user");
-const FriendRequest = require("./models/friendRequest");
+const User = require("./models/User");
+const FriendRequest = require("./models/FriendRequest");
+const OneToOneMessage = require("./models/OneToOneMessage");
 require("dotenv").config();
 
 const authMiddleware = require("./middlewares/auth");
@@ -45,10 +45,9 @@ io.on("connection", async (socket) => {
     const socket_id = socket.id;
     const _id = socket.handshake.query._id;
 
-    if(_id) await User.findByIdAndUpdate(_id, { socket_id });
+    if(_id) await User.findByIdAndUpdate(_id, { socket_id, status: "online" });
 
     socket.on("send_friend_request", async (data) => {
-        console.log({data});
 
         const toUser = User.findById(data.to, { socket_id: true, username: true });
         const fromUser = User.findById(data.from, { socket_id: true, username: true });
@@ -56,7 +55,6 @@ io.on("connection", async (socket) => {
         const newRequest = await FriendRequest.create({
             sender: data.from, recipient: data.to
         });
-
 
         if(newRequest) {
             io.to(toUser.socket_id).emit("recieve_friend_request", {
@@ -101,13 +99,16 @@ io.on("connection", async (socket) => {
             severity: "info",
             message: "Friend request accepted"
         });
-
-        io.on("test", (data) => {
-            console.log("\n\n\ntest is = ", {data}, "\n\n\n");
-        })
     });
 
-    socket.on("disconnect", () => {
+    socket.on("text_message", (data) => {
+        console.log(data);
+
+        // data => from to 
+    });
+
+    socket.on("disconnect", async () => {
+        await User.findByIdAndUpdate(_id, { status: "offline" });
         console.log("connection disconnected");
         socket.disconnect(0);
     });

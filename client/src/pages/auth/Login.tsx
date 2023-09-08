@@ -32,14 +32,15 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post("http://localhost:5000/auth/login", user);
+            const res = await axios.post("http://localhost:5000/auth/login", user, { withCredentials: true });
             console.log(res.data);
             
-            const { message, severity } = res.data;
+            const { _id, message, severity } = res.data;
             dispatch(showMessage<any>({ message, severity }));
         
             if(severity === "success") {
                 navigate("/chat");
+                window.localStorage.setItem("_id", _id);
             }
         }
 

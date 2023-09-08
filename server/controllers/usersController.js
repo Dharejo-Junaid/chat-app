@@ -1,16 +1,15 @@
-const User = require("../models/user");
-const FirendRequest = require("../models/friendRequest");
+const User = require("../models/User");
+const FirendRequest = require("../models/FriendRequest");
 
 const getUsers = async (req, res) => {
     const _id = req._id;
-    // const _id = "64f80bde4b71a7412ab18454";
 
     const allUsers = await User.find(
-        { isVerified: true }, { username: true }
+        { isVerified: true }, { _id: true, username: true, avatar: true }
     );
     
-    const currUser = await User.findById(_id.toString());
-    const friends = currUser.friends;
+    const currUser = await User.findById(_id);
+    const friends = currUser.friends || [];
 
     // remove our friends and user it self;
     const remUsers = allUsers.filter(
@@ -26,7 +25,6 @@ const getUsers = async (req, res) => {
 
 const getFriends = async (req, res) => {
     const _id = req._id;
-    // const _id = "64f80bde4b71a7412ab18454";
 
     const currUser = await User.findById(_id.toString())
         .populate("friends").select("_id username email");
@@ -40,11 +38,12 @@ const getFriends = async (req, res) => {
 
 const getRequests = async (req, res) => {
     const _id = req._id;
-    // const _id = "64f80bde4b71a7412ab18454";
 
     const allRequests = await FirendRequest.find(
         { recipient: _id }, { sender: true, createdAt: true }
-    );
+    ).populate("sender", "username avatar");
+
+    console.log("allRequests", allRequests);
     
     res.json({
         severity: "success",

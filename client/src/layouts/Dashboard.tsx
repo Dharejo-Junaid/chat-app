@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const Dashboard = () => {
 
     const dispatch = useDispatch();
-    const _id = "64f80bde4b71a7412ab18454";
+    const _id = window.localStorage.getItem("_id");
 
     useEffect(() => {
 

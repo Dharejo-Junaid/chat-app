@@ -32,6 +32,11 @@ const User = new Schema({
         type: String
     },
 
+    status: {
+        type: String,
+        enum: ["online", "offline"]
+    },
+
     friends: [
         {
             type: Schema.ObjectId,

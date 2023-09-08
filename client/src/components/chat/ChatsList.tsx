@@ -6,6 +6,9 @@ import { CircleDashed, Users } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { fetchUsers, fetchFriends, fetchRequests } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
+import ExploreUserComponent from "./ExploreUserComponent";
+import FriendsComponent from "./FriendsComponent";
+import RequestComponent from "./RequestComponent";
 
 const FriendsTab = () => {
 
@@ -20,7 +23,7 @@ const FriendsTab = () => {
     }, []);
 
     return (
-        friends.map((friend: any) => <li>{friend.username}</li>)
+        friends.map((friend: any) => <FriendsComponent key={friend._id} {...friend}/>)
     );
 }
 
@@ -37,7 +40,7 @@ const ExploreTab = () => {
     }, []);
 
     return (
-        users.map((user: any) => <li>{user.username}</li>)
+        users.map((user: any) => <ExploreUserComponent key={user._id} {...user}/>)
     );
 }
 
@@ -53,7 +56,7 @@ const RequestsTab = () => {
     }, []);
 
     return (
-        requests.map((request: any) => <li>{request.username}</li>)
+        requests.map((request: any) => <RequestComponent key={request._id} {...request}/>)
     );
 }
 
@@ -91,7 +94,7 @@ const UserDialog = ({ open, onClose }: any) => {
                     <Tab label="Requests"/>
                 </Tabs>
 
-                <Stack mt={2}>
+                <Stack mt={2} spacing={1.5}>
                     { switchTab(selectedTab) }
                 </Stack>
             </DialogContent>

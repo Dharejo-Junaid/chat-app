@@ -5,7 +5,7 @@ const auth = async (req, res, next) => {
     try {
         const token = req.cookies.token;
         const { _id } = verifyToken(token);
-
+        
         if(_id) {
             req._id = _id;
             return next();
@@ -18,8 +18,6 @@ const auth = async (req, res, next) => {
             message: "token not found"
         });
     }
-
-    
 }
 
 module.exports = auth;

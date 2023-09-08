@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../models/User");
 const { hash, compare } = require("bcrypt");
 const verificationSuccessHtml = require("../views/verificationSuccessHtml");
 const { 
@@ -66,6 +66,7 @@ const login = async (req, res) => {
     }
 
     const user = await User.findOne({email});
+    console.log({user});
     if(! user) {
         return res.json({
             severity: "error",
@@ -83,6 +84,7 @@ const login = async (req, res) => {
     // generate token;
     const { _id } = user;
     const token = createToken(_id);
+    console.log({token});
 
     if(! user.isVerified) {
 
@@ -97,7 +99,8 @@ const login = async (req, res) => {
     res.cookie("token", token, { expiresIn: "15d", httpOnly: true })
     .json({
         severity: "success",
-        message: "Loged in successfully"
+        message: "Loged in successfully",
+        _id
     });
 }
 
