@@ -18,7 +18,7 @@ const getUsers = async (req, res) => {
     );
     
     res.json({
-        status: "success",
+        severity: "success",
         data: remUsers,
         message: "users found successfully"
     });
@@ -32,7 +32,7 @@ const getFriends = async (req, res) => {
         .populate("friends").select("_id username email");
 
     res.json({
-        status: "success",
+        severity: "success",
         data: currUser.friends,
         message: "users found successfully"
     });
@@ -47,7 +47,7 @@ const getRequests = async (req, res) => {
     );
     
     res.json({
-        status: "success",
+        severity: "success",
         data: allRequests,
         message: "users found successfully"
     });
