@@ -4,10 +4,19 @@ import axios from "axios";
 const initialState = {
     users: [],
     friends: [],
-    requests: []
+    requests: [],
+
+    chatType: "inidividual",
+    roomId: 0
 }
 
-const reducers = {};
+const reducers = {
+    selectChat: (state: typeof initialState, action: any) => {
+        state.chatType = "inidividual";
+        state.roomId = action.payload;
+        console.log("payload = ", action.payload);
+    }
+};
 
 export const fetchUsers = createAsyncThunk("app/fetchUsers", async () => {
     return axios.get("http://localhost:5000/users/get-users", { withCredentials: true })
@@ -53,3 +62,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
+export const { selectChat } = slice.actions;

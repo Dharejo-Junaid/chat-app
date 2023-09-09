@@ -7,7 +7,6 @@ import { Link as RouterLink, useParams } from "react-router-dom";
 const ResetPassword = () => {
 
     const { token } = useParams();
-    console.log("token = ", token);
 
     const [ password, setPassword ] = useState({
         newPassword: "",
@@ -26,15 +25,9 @@ const ResetPassword = () => {
 
         try{
             const res = await axios.post("http://localhost:5000/auth/reset-password", { token: "bearer jhSVGUXFgshgfbhdbxjhfbj", password: password.newPassword });
-
-            console.log(res.data);
         }
 
-        catch(err: any) {
-            
-        }
-
-        
+        catch(err: any) {}
     }
 
     return (

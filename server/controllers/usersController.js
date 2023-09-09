@@ -42,8 +42,6 @@ const getRequests = async (req, res) => {
     const allRequests = await FirendRequest.find(
         { recipient: _id }, { sender: true, createdAt: true }
     ).populate("sender", "username avatar");
-
-    console.log("allRequests", allRequests);
     
     res.json({
         severity: "success",

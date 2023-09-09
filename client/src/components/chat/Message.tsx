@@ -1,30 +1,33 @@
 import { Stack } from "@mui/material"
 
-import { Chat_History } from "../../contents/data";
 import { TimeLine, MediaMessage, DocumentMessage, ReplyMessage, TextMessage } from "../message_types"
+import { useSelector } from "react-redux";
 
 const Message = () => {
 
+    const currectMessages = useSelector((state: any) => state.conversation.oneToOneChat.currectMessages
+    );
+
     return <Stack spacing={3} p={1.5} sx={{ backgroundColor: "#F0F4FA" }}>
         {
-            Chat_History.map( (el) => {
+            currectMessages.map( (el: any) => {
                 switch (el.type) {
                     case "divider":
-                        return <TimeLine {...el}/>;
+                        return <TimeLine key={el._id} {...el}/>;
 
                     case "msg":
                         switch (el.subtype) {
                             case "img": 
-                                return <MediaMessage {...el}/>
+                                return <MediaMessage key={el._d} {...el}/>
                             
                             case "doc":
-                                return <DocumentMessage {...el}/>
+                                return <DocumentMessage key={el._d} {...el}/>
 
                             case "reply":
-                                return <ReplyMessage {...el}/>
+                                return <ReplyMessage key={el._d} {...el}/>
 
                             default:
-                                return <TextMessage {...el} />
+                                return <TextMessage key={el._d} {...el} />
                         }
                     
                     default: return <></>;

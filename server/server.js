@@ -47,7 +47,7 @@ io.on("connection", async (socket) => {
 
     if(_id) await User.findByIdAndUpdate(_id, { socket_id, status: "online" });
 
-    socket.on("send_friend_request", async (data) => {
+    socket.on("send_friend_request", async (data, callback) => {
 
         const toUser = User.findById(data.to, { socket_id: true, username: true });
         const fromUser = User.findById(data.from, { socket_id: true, username: true });
@@ -56,27 +56,23 @@ io.on("connection", async (socket) => {
             sender: data.from, recipient: data.to
         });
 
+        await newRequest.save();
+
         if(newRequest) {
             io.to(toUser.socket_id).emit("recieve_friend_request", {
                 severity: "info",
                 message: "New friend request recieved"
             });
 
-            io.to(fromUser.socket_id).emit("is_sent_friend_request", {
-                severity: "info",
-                message: "Your request has been sent successfully"
-            });
+            callback({ isSent: true });
         }
 
         else {
-            io.to(fromUser.socket_id).emit("is_sent_friend_request", {
-                severity: "error",
-                message: "Issue in sending your friend request"
-            });
+            callback({ isSent: false });
         }
     });
 
-    socket.on("accept_friend_request", async (data) => {
+    socket.on("accept_friend_request", async (data, callback) => {
         const request = await FriendRequest.findById(data.requestId);
 
         const sender = await User.findById(request.sender);
@@ -88,28 +84,75 @@ io.on("connection", async (socket) => {
         await sender.save();
         await recipient.save();
 
+        const newChat = await OneToOneMessage.create({
+            participients: [
+                sender._id, recipient._id
+            ]
+        });
+
+        await newChat.save();
+
         await FriendRequest.findByIdAndDelete(data.requestId);
 
-        io.to(recipient.socket_id).emit("is_accepted_request", {
+        io.to(recipient.socket_id).emit("friend_request_accepted", {
             severity: "info",
             message: "Friend request accepted"
         });
+        
+        callback();
 
-        io.to(sender.socket_id).emit("is_accepted_request", {
-            severity: "info",
-            message: "Friend request accepted"
-        });
     });
 
-    socket.on("text_message", (data) => {
+    socket.on("get_one_to_one_conversations", async ({ _id }, callback) => {
+        const conversations = await OneToOneMessage.find({
+            participients: { $all: [_id] }
+        }).populate("participients", "_id username avatar status email");
+        
+        callback(conversations);
+    });
+
+    socket.on("start_conversation", async ({ from, to}) => {
+        const conversation = OneToOneMessage.find({
+            participients: { $size: 2, $all: [from, to] }
+        }).populate("participients", "_id username avatar status email");
+        
+        socket.emit("start_chat", conversation);
+
+        // if(conversation[0].messages.length === 0) {
+        //     callback({ message: "START_A_NEW_CHAT", conversation});
+        // } else {
+        //     callback({ message: "OPEN_EXISTING_CHAT", conversation});
+        // }
+    });
+
+    socket.on("get_messages", async(data, callback) => {
+        const messages = await OneToOneMessage.findById(data.conversationId, { messages: true });
+        console.log(messages);
+        callback(messages);
+    });
+
+    socket.on("text_message", async (data) => {
         console.log(data);
 
-        // data => from to 
+        const { conversationId, to, from, type, message } = data;
+        
+        const chat = await OneToOneMessage.findById(conversationId);
+        chat.messages.push({
+            from, to, type, text: message
+        });
+
+        await chat.save();
+
+        const toUser = await User.findById(to);
+        const fromUser = await User.findById(from);
+
+        io.to(toUser.socket_id).emit("new_message", { conversationId, message });
+        io.to(fromUser.socket_id).emit("new_message", { conversationId, message });
     });
 
     socket.on("disconnect", async () => {
         await User.findByIdAndUpdate(_id, { status: "offline" });
-        console.log("connection disconnected");
+        console.log("User disconnected = ", socket_id);
         socket.disconnect(0);
     });
 });

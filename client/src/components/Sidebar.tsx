@@ -82,9 +82,9 @@ const Sidebar = () => {
                         onClose={handleClose}
                     >
                         {
-                            profileMenu.map(({ title, icon }: any, idx) => {
+                            profileMenu.map(({ title, icon }: any, idx: number) => {
                                 return (
-                                    <MenuItem onClick={() => HandleMenuItem(idx)}>
+                                    <MenuItem key={idx} onClick={() => HandleMenuItem(idx)}>
                                         <Stack
                                             direction="row"
                                             width="100px"

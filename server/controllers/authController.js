@@ -40,7 +40,7 @@ const signup = async (req, res) => {
     const isSent = await sendEmail(email, token);
 
     if(! isSent) {    
-        await User.findByIdAndDelete(_id);
+        // await User.findByIdAndDelete(_id);
 
         return res.json({
             severity: "error",
@@ -66,7 +66,6 @@ const login = async (req, res) => {
     }
 
     const user = await User.findOne({email});
-    console.log({user});
     if(! user) {
         return res.json({
             severity: "error",
@@ -84,7 +83,6 @@ const login = async (req, res) => {
     // generate token;
     const { _id } = user;
     const token = createToken(_id);
-    console.log({token});
 
     if(! user.isVerified) {
 
@@ -107,8 +105,6 @@ const login = async (req, res) => {
 
 const forgetPassword = async (req, res) => {
     const { email } = req.body;
-
-    console.log(email);
 
     if(!email) return res.json({
         severity: "error",
@@ -165,7 +161,6 @@ const resetPassword = async (req, res) => {
 
 const verifyAccount = async (req, res) => {
     const { token } = req.params;
-    console.log({token});
 
     // verify token and grab id;
     try{

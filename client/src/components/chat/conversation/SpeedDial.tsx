@@ -40,8 +40,8 @@ function ConversationSpeedDial() {
         position="relative"
         left="-10px"
       >
-        {actions.map(( {icon, name, y}: any ) => (
-          <Tooltip title={name}>
+        {actions.map(( {icon, name, y}: any, idx: number ) => (
+          <Tooltip key={idx} title={name}>
             <Fab sx={{ position: "absolute", top: -y }}>{icon}</Fab>
           </Tooltip>
         ))}

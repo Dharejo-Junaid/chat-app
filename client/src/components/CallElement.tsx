@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Stack, Avatar, Typography, Badge, IconButton } from "@mui/material";
+import { Stack, Avatar, Typography, IconButton } from "@mui/material";
 import { ArrowDownLeft, ArrowUpRight, Phone } from "@phosphor-icons/react";
 
 const CallElement = ({id, img, name, missed, incomming }: any) => {

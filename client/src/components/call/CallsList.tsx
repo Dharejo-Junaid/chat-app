@@ -50,8 +50,8 @@ const CallsList = () => {
             <Stack spacing={1} marginTop={2}>
                 <Typography variant="caption">All calls</Typography>
                 {
-                    CALL_LOGS.map( (el) => {
-                        return <CallElement { ...el } />
+                    CALL_LOGS.map( (el: any) => {
+                        return <CallElement key={el._id} { ...el } />
                     } )
                 }
             </Stack>

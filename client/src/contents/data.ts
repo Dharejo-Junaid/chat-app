@@ -2,35 +2,35 @@ import { faker } from "@faker-js/faker";
 
 export const CALL_LOGS = [
   {
-    id: 0,
+    _id: 0,
     img: faker.image.avatar(),
     name: faker.name.firstName(),
     missed: true,
     incomming: false
   },
   {
-    id: 1,
+    _id: 1,
     img: faker.image.avatar(),
     name: faker.name.firstName(),
     missed: true,
     incomming: true
   },
   {
-    id: 2,
+    _id: 2,
     img: faker.image.avatar(),
     name: faker.name.firstName(),
     missed: false,
     incomming: false
   },
   {
-    id: 3,
+    _id: 3,
     img: faker.image.avatar(),
     name: faker.name.firstName(),
     missed: true,
     incomming: true
   },
   {
-    id: 4,
+    _id: 4,
     img: faker.image.avatar(),
     name: faker.name.firstName(),
     missed: true,
@@ -40,7 +40,7 @@ export const CALL_LOGS = [
 
 export const ChatList = [
     {
-      id: 0,
+      _id: 0,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -50,7 +50,7 @@ export const ChatList = [
       online: true,
     },
     {
-      id: 1,
+      _id: 1,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -60,7 +60,7 @@ export const ChatList = [
       online: false,
     },
     {
-      id: 2,
+      _id: 2,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -70,7 +70,7 @@ export const ChatList = [
       online: true,
     },
     {
-      id: 3,
+      _id: 3,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -80,7 +80,7 @@ export const ChatList = [
       online: true,
     },
     {
-      id: 4,
+      _id: 4,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -90,7 +90,7 @@ export const ChatList = [
       online: false,
     },
     {
-      id: 5,
+      _id: 5,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -100,7 +100,7 @@ export const ChatList = [
       online: false,
     },
     {
-      id: 6,
+      _id: 6,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -110,7 +110,7 @@ export const ChatList = [
       online: false,
     },
     {
-      id: 7,
+      _id: 7,
       img: faker.image.avatar(),
       name: faker.name.firstName(),
       msg: faker.music.songName(),
@@ -129,7 +129,7 @@ export const ChatList = [
       outgoing: false,
     },
     {
-      type: "divider",
+      type: "div_ider",
       text: "Today",
     },
     {

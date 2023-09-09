@@ -25,9 +25,7 @@ const ForgetPassword = () => {
             dispatch(showMessage<any>({ message, severity}));
         }
 
-        catch(err: any) {
-            console.log(err);
-        }
+        catch(err: any) {}
 
         setLoading(false);
     }

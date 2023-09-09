@@ -1,12 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { Stack, Avatar, Typography, IconButton } from "@mui/material";
 import { Phone, VideoCamera, CaretDown } from "@phosphor-icons/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../../../redux/slices/sidebar";
 
 const Header = () => {
 
     const dispatch = useDispatch();
+    const currentConversation = useSelector((state: any) => state.conversation.oneToOneChat.currentConveration
+    );
+    
 
     return (
         <Stack
@@ -29,10 +32,10 @@ const Header = () => {
                     }
                 }}
             >
-                <Avatar src={faker.image.avatar()} alt="J"/>
+                <Avatar src={currentConversation.img} alt="J"/>
                 <Stack>
-                    <Typography>Junaid</Typography>
-                    <Typography variant="caption">Online</Typography>
+                    <Typography>{currentConversation.name}</Typography>
+                    <Typography variant="caption">{currentConversation.status? "Online" : "Offline"}</Typography>
                 </Stack>
             </Stack>
 

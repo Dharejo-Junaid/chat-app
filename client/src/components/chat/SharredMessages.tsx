@@ -73,9 +73,9 @@ const MediaTab = () => {
     return (
         <ImageList cols={3} sx={{ maxWidth: "300px" }}>
             {
-                [0, 1, 2, 3, 4, 5, 6].map(() => {
+                [0, 1, 2, 3, 4, 5, 6].map((_el, idx: number) => {
                     return (
-                        <ImageListItem>
+                        <ImageListItem key={idx}>
                             <img src={faker.image.city()} alt="FOOD" />
                         </ImageListItem>
                     );
@@ -91,9 +91,9 @@ const LinksTab = () => {
     return (
         <>
             {
-                SHARRED_LINKS.map(el => {
+                SHARRED_LINKS.map((el, idx: number) => {
                     return (
-                        <Paper elevation={4} sx={{ p: "10px" }}>
+                        <Paper key={idx} elevation={4} sx={{ p: "10px" }}>
                             <Stack spacing={1}>
                                 <Typography
                                     variant="caption"
@@ -118,9 +118,9 @@ const DocsTab = () => {
     return (
         <>
             {
-                SHARRED_DOCS.map(() => {
+                SHARRED_DOCS.map((_el, idx: number) => {
                     return (
-                        <Paper elevation={4} sx={{ p: "10px" }}>
+                        <Paper key={idx} elevation={4} sx={{ p: "10px" }}>
                         <Stack direction="row" alignItems="center" justifyContent="space-between">
                             <Stack direction="row" spacing={2} alignItems="center" >
                                 <File size={20}/>

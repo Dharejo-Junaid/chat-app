@@ -19,7 +19,6 @@ const Login = () => {
 
     const handleUser = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log( { name, value } );
         setUser( (prev) => {
             return {
                 ...prev, [name]: value
@@ -33,20 +32,19 @@ const Login = () => {
 
         try {
             const res = await axios.post("http://localhost:5000/auth/login", user, { withCredentials: true });
-            console.log(res.data);
             
             const { _id, message, severity } = res.data;
-            dispatch(showMessage<any>({ message, severity }));
-        
+            
             if(severity === "success") {
-                navigate("/chat");
                 window.localStorage.setItem("_id", _id);
+                navigate("/chat");
             }
+
+            dispatch(showMessage<any>({ message, severity }));
+
         }
 
-        catch(err: any) {
-            console.log(err.message);
-        }
+        catch(err: any) {}
 
         setLoading(false);
     }

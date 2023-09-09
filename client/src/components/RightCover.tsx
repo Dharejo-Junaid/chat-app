@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import Settings from "../../assets/settings.svg";
+import Settings from "../assets/settings.svg";
 
 const SettingsCover = () => {
     return (

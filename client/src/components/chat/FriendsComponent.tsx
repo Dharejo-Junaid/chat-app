@@ -1,5 +1,5 @@
 import { Message } from "@mui/icons-material";
-import { Stack, Avatar, Typography, Button, IconButton, Paper } from "@mui/material";
+import { Stack, Avatar, Typography, IconButton, Paper } from "@mui/material";
 
 const FriendsComponent = ({ _id, username, avatar }: any) => {
     

@@ -1,6 +1,5 @@
 import { Typography, Stack, IconButton, Dialog, DialogTitle, DialogContent, Tabs, Tab } from "@mui/material";
 import Searchbar from "../Searchbar";
-import { ChatList } from "../../contents/data";
 import ChatElement from "../ChatElement";
 import { CircleDashed, Users } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
@@ -14,9 +13,6 @@ const FriendsTab = () => {
 
     const dispatch = useDispatch();
     const friends = useSelector((state: any) => state.app.friends);
-
-    console.log("friends = ", friends);
-    
 
     useEffect(() => {
         dispatch<any>(fetchFriends());
@@ -32,12 +28,9 @@ const ExploreTab = () => {
     const dispatch = useDispatch();
     const users = useSelector((state: any) => state.app.users);
 
-    console.log("users = ", users);
-    
-
     useEffect(() => {
         dispatch<any>(fetchUsers());
-    }, []);
+    }, [users]);
 
     return (
         users.map((user: any) => <ExploreUserComponent key={user._id} {...user}/>)
@@ -49,11 +42,9 @@ const RequestsTab = () => {
     const dispatch = useDispatch();
     const requests = useSelector((state: any) => state.app.requests);
 
-    console.log("requests = ", requests);
-
     useEffect(() => {
         dispatch<any>(fetchRequests());
-    }, []);
+    }, [requests]);
 
     return (
         requests.map((request: any) => <RequestComponent key={request._id} {...request}/>)
@@ -105,6 +96,7 @@ const UserDialog = ({ open, onClose }: any) => {
 const ChatsList = () => {
 
     const [ openDialog, setOpenDialog ] = useState(false);
+    const oneToOneConversations = useSelector((state: any) => state.conversation.oneToOneChat.conversations);
 
     const onOpen = () => {
         setOpenDialog(true);
@@ -143,8 +135,8 @@ const ChatsList = () => {
             <Stack spacing={1} marginTop={2}>
                 <Typography variant="caption">All chats</Typography>
                 {
-                    ChatList.map( (el) => {
-                        return <ChatElement { ...el } />
+                    oneToOneConversations.map( (el: any) => {
+                        return <ChatElement key={el._id} { ...el } />
                     } )
                 }
             </Stack>

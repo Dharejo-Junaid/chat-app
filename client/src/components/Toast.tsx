@@ -10,7 +10,7 @@ const Toast = () => {
     return (
         <Snackbar
             open={snackbar.open}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             autoHideDuration={4000}
             onClose={() => dispatch(setOpen<any>({ open: false }))}
         >

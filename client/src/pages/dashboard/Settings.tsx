@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import SettingsList from "../../components/settings/SettingsList";
-import SettingsCover from "../../components/settings/SettingsCover";
+import SettingsCover from "../../components/RightCover";
 
 const Settings = () => {
     return (

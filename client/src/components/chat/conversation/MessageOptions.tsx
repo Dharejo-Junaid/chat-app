@@ -36,10 +36,10 @@ const MessageOptions = () => {
                     sx={{ p: "16px" }}
                 >
                     {
-                        messageOptions.map(({ title }: any) => {
+                        messageOptions.map((messageOption: any, idx: number) => {
                             return (
-                                <MenuItem onClick={handleClose}>
-                                    {title}
+                                <MenuItem key={idx} onClick={handleClose}>
+                                    {messageOption.title}
                                 </MenuItem>
                             );
                         })

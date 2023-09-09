@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     open: false,
-    message: "",
-    severity: "",
+    message: "default",
+    severity: "success",
 }
 
 const reducers = {
@@ -11,10 +11,10 @@ const reducers = {
         state.open = action.payload.open;
     },
 
-    showMessage: (state: any, action: any) => {
+    showMessage: (state: typeof initialState, action: any) => {
         state.message = action.payload.message;
         state.severity = action.payload.severity;
-        state.open = true;
+        state.open = true;        
     },
 }
 

@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, IconButton, Stack, Switch, Typography } from "@mui/material";
 import { Bell, CaretRight, FlagBanner, Phone, Star, Trash, VideoCamera, XCircle } from "@phosphor-icons/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar, changeType } from "../../redux/slices/sidebar";
 import { useState } from "react";
 
@@ -11,6 +11,8 @@ const Contact = () => {
 
     const [ openBlockDialog, setOpenBlockDialog ] = useState(false);
     const [ openDeleteDialog, setOpenDeleteDialog ] = useState(false);
+
+    const currentConveration = useSelector((state: any) => state.conversation.oneToOneChat.currentConveration);
 
     const handleBlockClose = () => {
         setOpenBlockDialog(false);
@@ -48,18 +50,18 @@ const Contact = () => {
 
             <Stack p={2} spacing={1.5} flexGrow={1} sx={{ overflowY: "scroll" }}>
 
-                <Stack direction="row" alignItems="center" spacing={1.5} p={1}>
+                <Stack alignItems="center" spacing={1.5} p={1}>
                     <Avatar
-                        src={faker.image.avatar()}
-                        alt={faker.name.firstName()}
+                        src={currentConveration.img}
+                        alt={currentConveration.name}
                         sx={{
                             width: "60px",
                             height: "60px"
                         }}
                     />
-                    <Stack spacing={0.25}>
-                        <Typography variant="subtitle1">Junaid Ali</Typography>
-                        <Typography variant="caption">+923093878422</Typography>
+                    <Stack spacing={0.25} alignItems="center">
+                        <Typography variant="subtitle1">{currentConveration.name}</Typography>
+                        <Typography variant="caption">{currentConveration.email}</Typography>
                     </Stack>
                 </Stack>
 
@@ -100,10 +102,9 @@ const Contact = () => {
 
                 <Stack direction="row" alignItems="center" spacing={2} maxWidth="250px">
                     {
-                        [1, 2, 3].map(() => {
+                        [1, 2, 3].map((_el, idx: number) => {
                             return (
-                                <img style={{ width: "32%", height: "32%" }} src={faker.image.city()} alt="Image" />
-                                
+                                <img key={idx} style={{ width: "32%", height: "32%" }} src={faker.image.city()} alt="Image" />
                             );
                         })
                     }

@@ -2,6 +2,7 @@ import { Stack, Avatar, Typography, Button, Paper } from "@mui/material";
 import { socket } from "../../socket";
 import { showMessage } from "../../redux/slices/snackbar";
 import { useDispatch } from "react-redux";
+import { fetchRequests } from "../../redux/slices/app";
 
 const RequestComponent = ({ _id, sender, createdAt }: any) => {
 
@@ -21,6 +22,7 @@ const RequestComponent = ({ _id, sender, createdAt }: any) => {
                     socket.emit("accept_friend_request", { requestId: _id }, () => {
                         dispatch(showMessage<any>({ severity: "success", message: "You just created a new connection" }))
                     });
+                    dispatch<any>(fetchRequests());
                 }}>
                     Accept
                 </Button>

@@ -18,7 +18,6 @@ const Signup = () => {
 
     const handleUser = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log( { name, value } );
         setUser( (prev) => {
             return {
                 ...prev, [name]: value
@@ -35,9 +34,8 @@ const Signup = () => {
             const { message, severity } = res.data;
             dispatch(showMessage<any>({ message, severity }));
         }
-        catch(err: any) {
-            console.log(err.message);
-        }
+        catch(err: any) {}
+
         setLoading(false);
     }
 

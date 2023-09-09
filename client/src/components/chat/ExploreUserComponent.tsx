@@ -1,17 +1,12 @@
-import { faker } from "@faker-js/faker";
 import { Avatar, Button, Paper, Stack, Typography } from "@mui/material";
 import { socket } from "../../socket";
 import { showMessage } from "../../redux/slices/snackbar";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const ExploreUserComponent = ({ _id, username, avatar }: any) => {
     
     const from = window.localStorage.getItem("_id");
-    if(!from) useNavigate()("/login");
-
     const dispatch = useDispatch();
-    
 
     return (
         <Paper elevation={3}>
@@ -22,8 +17,9 @@ const ExploreUserComponent = ({ _id, username, avatar }: any) => {
                 </Stack>
 
                 <Button onClick={() => {
-                    socket.emit("send_friend_request", { from, to: _id }, () => {
-                        dispatch(showMessage<any>({ severity: "success", message: "Request sent" }));
+                    socket.emit("send_friend_request", { from, to: _id }, ({isSent}: any) => {
+                        if(isSent) dispatch(showMessage<any>({ severity: "success", message: "Friend request has been sent" }));
+                        else dispatch(showMessage<any>({ severity: "error", message: "Request can not be send at this movement" }));
                     });
                 }}>
                     Send request

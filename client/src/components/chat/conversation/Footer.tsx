@@ -5,12 +5,26 @@ import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import ConversationSpeedDial from "./SpeedDial";
 import { Send, SentimentSatisfiedAlt } from "@mui/icons-material";
+import { socket } from "../../../socket";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
     
     const [ userMessage, setUserMessage ] = useState("");
     const [ openEmoiPicker, setOpenEmojiPicker ] = useState(false);
     const [ openSpeedDial, setOpenSpeedDial ] = useState(false);
+
+    const roomId = useSelector((state: any) => state.app.roomId);
+
+    const sendMessage = (event: any) => {
+        event.preventDefault();
+
+        socket.emit("text_message", { conversationId: roomId, message: userMessage }, () => {
+
+        });
+
+        setUserMessage("");
+    }
     
     return (
         <Stack
@@ -54,7 +68,11 @@ const Footer = () => {
                 </Box>
             </Stack>
             
-            <IconButton><Send sx={{color: "#080707"}}/></IconButton>
+            <IconButton
+                onClick={sendMessage}
+            >
+                <Send sx={{color: "#080707"}}/>
+            </IconButton>
         </Stack>
     );
 }

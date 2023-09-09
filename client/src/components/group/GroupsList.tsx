@@ -1,4 +1,4 @@
-import { Typography, Stack, IconButton, Button, Divider } from "@mui/material";
+import { Typography, Stack, Button, Divider } from "@mui/material";
 import Searchbar from "../Searchbar";
 import { Plus } from "@phosphor-icons/react";
 import ChatElement from "../ChatElement";
@@ -51,7 +51,7 @@ const GroupsList = () => {
                 <Typography variant="caption">All chats</Typography>
                 {
                     ChatList.map( (el) => {
-                        return <ChatElement { ...el } />
+                        return <ChatElement key={el._id} { ...el } />
                     } )
                 }
             </Stack>

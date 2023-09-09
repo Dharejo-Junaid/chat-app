@@ -1,11 +1,24 @@
-import { faker } from "@faker-js/faker";
 import { Stack, Badge, Avatar, Typography } from "@mui/material";
+import { selectChat } from "../redux/slices/app";
+import { useDispatch } from "react-redux";
+import { socket } from "../socket";
+import { updateOneToOneCurrentConversation, updateOneToOneCurrentMessages } from "../redux/slices/conversation";
 
-const ChatElement = ( { id, img, name, msg, time, unread, online }: any) => {
+const ChatElement = ( { _id, roomId, img, name, time, unread, online, email }: any) => {
 
+    const dispatch = useDispatch();
+    
     return (
         <Stack
-            key={id}
+            onClick={() => {
+                dispatch(selectChat(roomId));
+                dispatch(updateOneToOneCurrentConversation<any>({ name, img, online, email }));
+
+                socket.emit("get_messages", {conversationId: roomId}, async (data: any) => {
+                    console.log({...data});
+                    dispatch(updateOneToOneCurrentMessages<any>(data.messages));
+                });
+            }}
             direction="row"
             justifyContent="space-between"
             padding={1.5}
@@ -20,11 +33,11 @@ const ChatElement = ( { id, img, name, msg, time, unread, online }: any) => {
         >
             
             <Stack direction="row" alignItems="center">
-                    <Avatar src={faker.image.avatar()} alt={name}/>
+                    <Avatar src={img} alt={name}/>
 
                 <Stack marginLeft={2.5}>
                     <Typography>{name}</Typography>
-                    <Typography variant="caption" overflow="hidden">{msg}</Typography>
+                    <Typography variant="caption">{email}</Typography>
                 </Stack>
             </Stack>
 
