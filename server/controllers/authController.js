@@ -40,7 +40,7 @@ const signup = async (req, res) => {
     const isSent = await sendEmail(email, token);
 
     if(! isSent) {    
-        // await User.findByIdAndDelete(_id);
+        await User.findByIdAndDelete(_id);
 
         return res.json({
             severity: "error",

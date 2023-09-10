@@ -6,6 +6,7 @@ import { connectSocket, socket } from "../socket";
 import { showMessage } from "../redux/slices/snackbar";
 import { useDispatch } from "react-redux";
 import Toast from "../components/Toast";
+import React from "react";
 
 const Dashboard = () => {
 
@@ -18,12 +19,12 @@ const Dashboard = () => {
             connectSocket(_id);
         }
 
-        socket.on("recieve_friend_request", ({ severity, message }: any) => {
-            dispatch(showMessage<any>({ severity, message }));
+        socket.on("recieve_friend_request", ({ severity, message }) => {
+            dispatch(showMessage({ severity, message }));
         });
 
-        socket.on("friend_request_accepted", ({ severity, message }: any) => {
-            dispatch(showMessage<any>({ severity, message }));
+        socket.on("friend_request_accepted", ({ severity, message }) => {
+            dispatch(showMessage({ severity, message }));
         });
 
         return () => {
