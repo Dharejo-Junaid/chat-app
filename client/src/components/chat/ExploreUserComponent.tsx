@@ -1,12 +1,18 @@
 import { Avatar, Button, Paper, Stack, Typography } from "@mui/material";
 import { socket } from "../../socket";
-import { showMessage } from "../../redux/slices/snackbar";
 import { useDispatch } from "react-redux";
+import { showMessage } from "../../redux/slices/snackbar";
 
 const ExploreUserComponent = ({ _id, username, avatar }: any) => {
     
     const from = window.localStorage.getItem("_id");
     const dispatch = useDispatch();
+
+    const sendFriendReuquest = (from: any, to: any) => {
+        socket.emit("send_friend_request", { from, to }, () => {
+            dispatch(showMessage<any>({ severity: "success", message: "Friend request has been sent" }));
+        });
+    }
 
     return (
         <Paper elevation={3}>
@@ -16,14 +22,7 @@ const ExploreUserComponent = ({ _id, username, avatar }: any) => {
                     <Typography>{username}</Typography>
                 </Stack>
 
-                <Button onClick={() => {
-                    socket.emit("send_friend_request", { from, to: _id }, ({isSent}: any) => {
-                        if(isSent) dispatch(showMessage<any>({ severity: "success", message: "Friend request has been sent" }));
-                        else dispatch(showMessage<any>({ severity: "error", message: "Request can not be send at this movement" }));
-                    });
-                }}>
-                    Send request
-                </Button>
+                <Button onClick={() => sendFriendReuquest(from, _id)} > Send request </Button>
             </Stack>
         </Paper>
     );

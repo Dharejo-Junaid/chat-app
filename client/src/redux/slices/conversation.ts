@@ -1,24 +1,24 @@
 import { faker } from "@faker-js/faker";
 import { createSlice } from "@reduxjs/toolkit";
+import { socket } from "../../socket";
 
 const _id = window.localStorage.getItem("_id");
 
 const initialState = {
-    oneToOneChat: {
-        conversations: [],
-        currentConveration: {},
-        currectMessages: []
+    chats: {
+        allChats: [],
+        currentChat: {},
+        currentChatMessages: []
     },
 
     groupChat: {}
 }
 
 const reducers = {
-    updateOneToOneConversations: (state: typeof initialState, action: any) => {
+    updateAllChats: (state: typeof initialState, action: any) => {
         
         const list = action.payload.map((el: any) => {
             const user = el.participients.find((elm: any) => elm._id.toString() !== _id);
-            console.log(user);
             
             return({
                 _id: user._id,
@@ -33,17 +33,25 @@ const reducers = {
             });
         });
         
-        state.oneToOneChat.conversations = list;
+        state.chats.allChats = list;
     },
     
-    updateOneToOneCurrentMessages: (state: typeof initialState, action: any) => {
-        state.oneToOneChat.currectMessages = action.payload;
+    updateCurrentChatMessages: (state: typeof initialState, action: any) => {
+        const messages = action.payload.map((msg: any) => {
+
+            return ({
+                _id: msg._id,
+                message: msg.text,
+                incoming: msg.to === _id,
+                type: "msg",
+                subtype: msg.type
+            });
+        });
+        state.chats.currentChatMessages = messages;
     },
 
-    updateOneToOneCurrentConversation: (state: typeof initialState, action: any) => {
-        console.log("updateOneToOneCurrentConversation = ", action.payload);
-        
-        state.oneToOneChat.currentConveration = action.payload;
+    updateCurrentChat: (state: typeof initialState, action: any) => {
+        state.chats.currentChat = action.payload;
     }
 };
 
@@ -55,7 +63,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 export const {
-    updateOneToOneConversations,
-    updateOneToOneCurrentMessages,
-    updateOneToOneCurrentConversation
+    updateAllChats,
+    updateCurrentChat,
+    updateCurrentChatMessages
 } = slice.actions;

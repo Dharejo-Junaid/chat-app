@@ -7,29 +7,39 @@ import SharredMessages from "../../components/chat/SharredMessages";
 import StarredMessages from "../../components/chat/StarredMessages";
 import RightCover from "../../components/RightCover";
 import { useEffect } from "react";
+import { updateAllChats, updateCurrentChatMessages } from "../../redux/slices/conversation";
 import { connectSocket, socket } from "../../socket";
-import { updateOneToOneConversations } from "../../redux/slices/conversation";
 
 const Chat = () => {
-    
-    const _id = window.localStorage.getItem("_id");
 
+    const dispatch = useDispatch();
+    const _id = window.localStorage.getItem("_id");
     const sidebar = useSelector((state: any) => state.sidebar);
     const { chatType, roomId } = useSelector((state: any) => state.app);
-    const dispatch = useDispatch();
+
+    const getAllChats = () => {
+
+        if(! socket) connectSocket(_id);
+
+        socket.emit("get_all_chats", {_id}, (data: any) => {
+            dispatch(updateAllChats(data));
+        });
+    }
 
     useEffect(() => {
-
-        if(! socket) {updateOneToOneConversations
-            connectSocket(_id);
-        }
-
-        socket.emit("get_one_to_one_conversations", {_id}, (data: any) => {
-            console.log("All converstions = ", data);
+        getAllChats();
+        socket.on("new_message", ({conversationId, message}: any) => {
             
-            dispatch(updateOneToOneConversations(data));
+            if(conversationId !== roomId) {
+                console.log("get all chats");                
+                getAllChats();
+            }
+
+            socket.emit("get_messages", { conversationId }, async (data: any) => {
+                dispatch(updateCurrentChatMessages<any>(data.messages));
+            });
         });
-        
+    
     }, []);
 
     return (
@@ -37,6 +47,7 @@ const Chat = () => {
             <ChatsList />
 
             { chatType==="inidividual" && roomId? <Conversation /> : <RightCover /> }
+            
             {
                 sidebar.open && (() => {
                     switch(sidebar.type) {

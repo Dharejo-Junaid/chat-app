@@ -5,10 +5,8 @@ import { useState } from "react";
 
 const messageOptions = [ 
     { title: "Reply" },
-    { title: "React to message" },
     { title: "Forword message" },
     { title: "Star message" },
-    { title: "Report" },
     { title: "Delete message" }
 ];
 

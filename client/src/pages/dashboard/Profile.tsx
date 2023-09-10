@@ -6,7 +6,7 @@ import RightCover from "../../components/RightCover";
 
 const Profile = () => {
 
-    const currentConveration = useSelector((state: any) => state.conversation.oneToOneChat.currentConveration);
+    const currentChat = useSelector((state: any) => state.conversation.chats.currentChat);
 
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Profile = () => {
 
                 <Paper elevation={4} sx={{ alignSelf: "center" ,maxWidth: "100px", maxHeight: "100px", p: "5px", borderRadius: "100px" }}>
                 <Avatar
-                    src={currentConveration.img}
+                    src={currentChat.img}
                     sx={{ width: "100px", height: "100px", alignSelf: "center" }}
                 />
                 </Paper>

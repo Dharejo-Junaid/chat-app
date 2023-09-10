@@ -96,7 +96,7 @@ const UserDialog = ({ open, onClose }: any) => {
 const ChatsList = () => {
 
     const [ openDialog, setOpenDialog ] = useState(false);
-    const oneToOneConversations = useSelector((state: any) => state.conversation.oneToOneChat.conversations);
+    const allChats = useSelector((state: any) => state.conversation.chats.allChats);
 
     const onOpen = () => {
         setOpenDialog(true);
@@ -113,7 +113,7 @@ const ChatsList = () => {
             maxHeight="100%"
             minWidth="300px"
             maxWidth="300px"
-            sx={{ 
+            sx={{
                 backgroundColor: "#F8FAFF",
                 overflowY: "scroll"
             }}
@@ -135,7 +135,7 @@ const ChatsList = () => {
             <Stack spacing={1} marginTop={2}>
                 <Typography variant="caption">All chats</Typography>
                 {
-                    oneToOneConversations.map( (el: any) => {
+                    allChats.map( (el: any) => {
                         return <ChatElement key={el._id} { ...el } />
                     } )
                 }

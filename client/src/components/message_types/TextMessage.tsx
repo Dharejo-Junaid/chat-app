@@ -3,6 +3,8 @@ import MessageOptions from "../chat/conversation/MessageOptions";
 
 export const TextMessage = ({ incoming, message }: any) => {
 
+    console.log("Text message = ", { incoming, message });
+    
     return (
         <Stack 
             direction="row"
@@ -16,7 +18,6 @@ export const TextMessage = ({ incoming, message }: any) => {
                     backgroundColor: incoming
                     ? "#FFFFFF"
                     : "#5B96F7"
-
                 }}
             >
                 {message}

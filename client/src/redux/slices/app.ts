@@ -15,6 +15,7 @@ const reducers = {
         state.chatType = "inidividual";
         state.roomId = action.payload;
         console.log("payload = ", action.payload);
+
     }
 };
 

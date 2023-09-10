@@ -12,7 +12,7 @@ const Contact = () => {
     const [ openBlockDialog, setOpenBlockDialog ] = useState(false);
     const [ openDeleteDialog, setOpenDeleteDialog ] = useState(false);
 
-    const currentConveration = useSelector((state: any) => state.conversation.oneToOneChat.currentConveration);
+    const currentChat = useSelector((state: any) => state.conversation.chats.currentChat);
 
     const handleBlockClose = () => {
         setOpenBlockDialog(false);
@@ -52,16 +52,16 @@ const Contact = () => {
 
                 <Stack alignItems="center" spacing={1.5} p={1}>
                     <Avatar
-                        src={currentConveration.img}
-                        alt={currentConveration.name}
+                        src={currentChat.img}
+                        alt={currentChat.name}
                         sx={{
                             width: "60px",
                             height: "60px"
                         }}
                     />
                     <Stack spacing={0.25} alignItems="center">
-                        <Typography variant="subtitle1">{currentConveration.name}</Typography>
-                        <Typography variant="caption">{currentConveration.email}</Typography>
+                        <Typography variant="subtitle1">{currentChat.name}</Typography>
+                        <Typography variant="caption">{currentChat.email}</Typography>
                     </Stack>
                 </Stack>
 

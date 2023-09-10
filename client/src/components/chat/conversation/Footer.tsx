@@ -15,13 +15,15 @@ const Footer = () => {
     const [ openSpeedDial, setOpenSpeedDial ] = useState(false);
 
     const roomId = useSelector((state: any) => state.app.roomId);
+    const currentChat = useSelector((state: any) => state.conversation.chats.currentChat);
+    console.log("current chat = ", currentChat);
+    
+    const _id = window.localStorage.getItem("_id");
 
     const sendMessage = (event: any) => {
         event.preventDefault();
 
-        socket.emit("text_message", { conversationId: roomId, message: userMessage }, () => {
-
-        });
+        socket.emit("text_message", { conversationId: roomId, message: userMessage, from:  _id, to: currentChat._id });
 
         setUserMessage("");
     }

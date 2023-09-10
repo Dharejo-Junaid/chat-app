@@ -2,22 +2,25 @@ import { Stack, Badge, Avatar, Typography } from "@mui/material";
 import { selectChat } from "../redux/slices/app";
 import { useDispatch } from "react-redux";
 import { socket } from "../socket";
-import { updateOneToOneCurrentConversation, updateOneToOneCurrentMessages } from "../redux/slices/conversation";
+import { updateCurrentChat, updateCurrentChatMessages } from "../redux/slices/conversation";
 
 const ChatElement = ( { _id, roomId, img, name, time, unread, online, email }: any) => {
 
     const dispatch = useDispatch();
+
+    const getMessages = (conversationId: any) => {
+        socket.emit("get_messages", { conversationId }, async (data: any) => {
+            dispatch(updateCurrentChatMessages<any>(data.messages));
+        });
+    }
     
     return (
         <Stack
             onClick={() => {
                 dispatch(selectChat(roomId));
-                dispatch(updateOneToOneCurrentConversation<any>({ name, img, online, email }));
+                dispatch(updateCurrentChat<any>({ _id, name, img, online, email }));
 
-                socket.emit("get_messages", {conversationId: roomId}, async (data: any) => {
-                    console.log({...data});
-                    dispatch(updateOneToOneCurrentMessages<any>(data.messages));
-                });
+                getMessages(roomId);
             }}
             direction="row"
             justifyContent="space-between"
@@ -37,7 +40,7 @@ const ChatElement = ( { _id, roomId, img, name, time, unread, online, email }: a
 
                 <Stack marginLeft={2.5}>
                     <Typography>{name}</Typography>
-                    <Typography variant="caption">{email}</Typography>
+                    {/* <Typography variant="caption">{email}</Typography> */}
                 </Stack>
             </Stack>
 

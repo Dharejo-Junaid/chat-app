@@ -91,19 +91,12 @@ io.on("connection", async (socket) => {
         });
 
         await newChat.save();
-
         await FriendRequest.findByIdAndDelete(data.requestId);
-
-        io.to(recipient.socket_id).emit("friend_request_accepted", {
-            severity: "info",
-            message: "Friend request accepted"
-        });
         
         callback();
-
     });
 
-    socket.on("get_one_to_one_conversations", async ({ _id }, callback) => {
+    socket.on("get_all_chats", async ({ _id }, callback) => {
         const conversations = await OneToOneMessage.find({
             participients: { $all: [_id] }
         }).populate("participients", "_id username avatar status email");
@@ -113,32 +106,25 @@ io.on("connection", async (socket) => {
 
     socket.on("start_conversation", async ({ from, to}) => {
         const conversation = OneToOneMessage.find({
-            participients: { $size: 2, $all: [from, to] }
+            participients: { $all: [from, to] }
         }).populate("participients", "_id username avatar status email");
         
         socket.emit("start_chat", conversation);
-
-        // if(conversation[0].messages.length === 0) {
-        //     callback({ message: "START_A_NEW_CHAT", conversation});
-        // } else {
-        //     callback({ message: "OPEN_EXISTING_CHAT", conversation});
-        // }
     });
 
     socket.on("get_messages", async(data, callback) => {
         const messages = await OneToOneMessage.findById(data.conversationId, { messages: true });
-        console.log(messages);
         callback(messages);
     });
 
     socket.on("text_message", async (data) => {
         console.log(data);
 
-        const { conversationId, to, from, type, message } = data;
+        const { conversationId, from, to, message } = data;
         
         const chat = await OneToOneMessage.findById(conversationId);
         chat.messages.push({
-            from, to, type, text: message
+            from, to, type: "Text", text: message
         });
 
         await chat.save();
