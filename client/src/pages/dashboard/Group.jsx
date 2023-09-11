@@ -3,15 +3,14 @@ import GroupsList from "../../components/group/GroupsList";
 import RightCover from "../../components/RightCover";
 
 const Groups = () => {
-    return (
-        <Stack direction="row" flexGrow={1} height="100vh">
-            <GroupsList />
-            {/* TODO => reuse conversation components */}
+  return (
+    <Stack direction="row" flexGrow={1} height="100vh">
+      <GroupsList />
+      {/* TODO => reuse conversation components */}
 
-            <RightCover />
-                 
-        </Stack>
-    );
-}
+      <RightCover />
+    </Stack>
+  );
+};
 
 export default Groups;

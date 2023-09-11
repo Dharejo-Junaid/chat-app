@@ -1,7 +1,6 @@
-import DocumentMessage from "./DocumentMessage";
-import MediaMessage from "./MediaMessage";
-import ReplyMessage from "./ReplyMessage";
-import TextMessage from "./TextMessage";
+import Document from "./Document";
+import Media from "./Media";
+import Text from "./Text";
 import TimeLine from "./TimeLine";
 
-export { DocumentMessage, MediaMessage, ReplyMessage, TextMessage, TimeLine };
+export { Document, Media, Text, TimeLine };

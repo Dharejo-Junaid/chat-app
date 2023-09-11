@@ -1,69 +1,67 @@
 import { faker } from "@faker-js/faker";
 import { createSlice } from "@reduxjs/toolkit";
-import { socket } from "../../socket";
+import { useDispatch } from "react-redux";
 
 const _id = window.localStorage.getItem("_id");
 
 const initialState = {
-    chats: {
-        allChats: [],
-        currentChat: {},
-        currentChatMessages: []
-    },
+  chatType: "inidividual",
+  chatId: 0,
 
-    groupChat: {}
-}
+  chats: {
+    allChats: [],
+    currentUser: {},
+    currentChat: [],
+  },
+
+  groupChat: {},
+};
 
 const reducers = {
-    updateAllChats: (state, action) => {
-        
-        const list = action.payload.map((el) => {
-            const user = el.participients.find((elm) => elm._id.toString() !== _id);
-            
-            return({
-                _id: user._id,
-                name: user.username,
-                email: user.email,
-                online: user.status === "online",
-                img: faker.image.avatar(),
-                msg: "Last message",
-                time: "12 : 12",
-                unread: 2,
-                roomId: el._id
-            });
-        });
-        
-        state.chats.allChats = list;
-    },
-    
-    updateCurrentChatMessages: (state, action) => {
-        const messages = action.payload.map((msg) => {
+  updateChatId: (state, action) => {
+    state.chatId = action.payload;
+  },
 
-            return ({
-                _id: msg._id,
-                message: msg.text,
-                incoming: msg.to === _id,
-                type: "msg",
-                subtype: msg.type
-            });
-        });
-        state.chats.currentChatMessages = messages;
-    },
+  updateAllChats: (state, action) => {
+    state.chats.allChats = action.payload.map((el) => {
+      const user = el.participients[0];
+      // user => _id username avatar status email;
+      return {
+        ...user,
+        avatar: faker.image.avatar(),
+        unread: 2,
+        chatId: el._id,
+      };
+    });
+  },
 
-    updateCurrentChat: (state, action) => {
-        state.chats.currentChat = action.payload;
-    }
+  updateCurrentUser: (state, action) => {
+    state.chats.currentUser = action.payload;
+  },
+
+  updateCurrentChat: (state, action) => {
+    const data = action.payload;
+    console.log("\n\nupdate ucrrent chat = ", { ...data }, "\n\n");
+    // msg => _id, from, to, type, (text | media | document), time;
+    state.chats.currentChat = action.payload.map((msg) => {
+      return {
+        ...msg,
+        incoming: msg.to === _id,
+      };
+    });
+  },
 };
 
 const slice = createSlice({
-    name: "conversation",
-    initialState,
-    reducers
+  name: "conversation",
+  initialState,
+  reducers,
 });
 
 export default slice.reducer;
 export const {
-    updateAllChats,
-    updateCurrentChat,
-    updateCurrentChatMessages
+  updateChatId,
+  updateAllChats,
+  updateCurrentChat,
+  updateCurrentUser,
 } = slice.actions;

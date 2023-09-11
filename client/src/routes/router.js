@@ -13,67 +13,67 @@ import Call from "../pages/dashboard/Call";
 import Profile from "../pages/dashboard/Profile";
 
 const router = createBrowserRouter([
-    {
-        path: "/auth",
-        Component: AuthLayout,
-        children: [
-            {
-                path: "signup",
-                Component: Signup,
-            },
+  {
+    path: "/auth",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "signup",
+        Component: Signup,
+      },
 
-            {
-                "path": "login",
-                Component: Login
-            },
+      {
+        path: "login",
+        Component: Login,
+      },
 
-            {
-                path: "forgetpassword",
-                Component: ForgetPassword
-            },
+      {
+        path: "forgetpassword",
+        Component: ForgetPassword,
+      },
 
-            {
-                path: "resetpassword/:token",
-                Component: ResetPassword
-            }
-        ]
-    },
+      {
+        path: "resetpassword/:token",
+        Component: ResetPassword,
+      },
+    ],
+  },
 
-    {
-        path: "/",
-        Component: DashboardLayout,
-        children: [
-            {
-                path: "chat",
-                Component: Chat
-            },
+  {
+    path: "/",
+    Component: DashboardLayout,
+    children: [
+      {
+        path: "chat",
+        Component: Chat,
+      },
 
-            {
-                path: "group",
-                Component: Group
-            },
+      {
+        path: "group",
+        Component: Group,
+      },
 
-            {
-                path: "call",
-                Component: Call
-            },
+      {
+        path: "call",
+        Component: Call,
+      },
 
-            {
-                path: "profile",
-                Component: Profile
-            },
+      {
+        path: "profile",
+        Component: Profile,
+      },
 
-            {
-                path: "settings",
-                Component: Settings
-            }
-        ]
-    },
+      {
+        path: "settings",
+        Component: Settings,
+      },
+    ],
+  },
 
-    {
-        path: "*",
-        Component: Page404
-    }
+  {
+    path: "*",
+    Component: Page404,
+  },
 ]);
 
 export default router;

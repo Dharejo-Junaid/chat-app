@@ -5,50 +5,48 @@ import Contact from "../../components/chat/Contact";
 import { useDispatch, useSelector } from "react-redux";
 import RightCover from "../../components/RightCover";
 import { useEffect } from "react";
-import { updateAllChats, updateCurrentChatMessages } from "../../redux/slices/conversation";
 import { connectSocket, socket } from "../../socket";
+import { updateAllChats, updateCurrentChat } from "../../redux/slices/conversation";
 
 const Chat = () => {
+  const _id = window.localStorage.getItem("_id");
 
-    const dispatch = useDispatch();
-    const _id = window.localStorage.getItem("_id");
-    const sidebar = useSelector((state) => state.sidebar);
-    const { chatType, roomId } = useSelector((state) => state.app);
+  const dispatch = useDispatch();
+  const { contactBar } = useSelector((state) => state.app);
+  const { chatType, chatId } = useSelector((state) => state.conversation);
 
-    const getAllChats = () => {
+  const getAllChats = () => {
+    socket.emit("get_all_chats", { _id }, (data) => {
+      dispatch(updateAllChats(data));
+    });
+  }
 
-        if(! socket) connectSocket(_id);
-
-        socket.emit("get_all_chats", {_id}, (data) => {
-            dispatch(updateAllChats(data));
-        });
+  useEffect(() => {
+    if(!socket) {
+      connectSocket(_id);
+      getAllChats();
     }
-
-    useEffect(() => {
-        getAllChats();
-        socket.on("new_message", ({conversationId, message}) => {
-            
-            if(conversationId !== roomId) {
-                console.log("get all chats");                
-                getAllChats();
-            }
-
-            socket.emit("get_messages", { conversationId }, async (data) => {
-                dispatch(updateCurrentChatMessages(data.messages));
-            });
-        });
     
-    }, []);
+    // data => chatId, message
+    socket.on("new_message", (data) => {
+      if (data.chatId !== chatId) {
+        getAllChats();
+      }
 
-    return (
-        <Stack direction="row" flexGrow={1} height="100vh">
-            <Chats />
+      socket.emit("get_chat", { chatId: data.chatId }, (messages) => {
+        dispatch(updateCurrentChat(messages));
+      });
+    });
+  }, []);
 
-            { chatType==="inidividual" && roomId? <Conversation /> : <RightCover /> }
-            { sidebar.open && <Contact /> }
+  return (
+    <Stack direction="row" flexGrow={1} height="100vh">
+      <Chats />
 
-        </Stack>
-    );
-}
+      {chatType === "inidividual" && chatId ? <Conversation /> : <RightCover />}
+      {contactBar.open && <Contact />}
+    </Stack>
+  );
+};
 
 export default Chat;
