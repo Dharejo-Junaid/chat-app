@@ -67,12 +67,13 @@ const slice = createSlice({
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.users = action.payload || [];
     }),
-    
-    builder.addCase(fetchRequests.fulfilled, (state, action) => {
-      state.requests = action.payload || [];
-    });
+      builder.addCase(fetchRequests.fulfilled, (state, action) => {
+        state.requests = action.payload || [];
+        console.log("requets = ", action.payload[0]);
+      });
   },
 });
 
 export default slice.reducer;
-export const { showToast, selectChat, toggleContactBar, setOpen } = slice.actions;
+export const { showToast, selectChat, toggleContactBar, setOpen } =
+  slice.actions;

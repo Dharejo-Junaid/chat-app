@@ -3,36 +3,36 @@ import { faker } from "@faker-js/faker";
 export const CALL_LOGS = [
   {
     _id: 0,
-    img: faker.image.avatar(),
-    name: faker.name.firstName(),
+    avatar: faker.image.avatar(),
+    username: faker.name.firstName(),
     missed: true,
     incomming: false
   },
   {
     _id: 1,
-    img: faker.image.avatar(),
-    name: faker.name.firstName(),
+    avatar: faker.image.avatar(),
+    username: faker.name.firstName(),
     missed: true,
     incomming: true
   },
   {
     _id: 2,
-    img: faker.image.avatar(),
-    name: faker.name.firstName(),
+    avatar: faker.image.avatar(),
+    username: faker.name.firstName(),
     missed: false,
     incomming: false
   },
   {
     _id: 3,
-    img: faker.image.avatar(),
-    name: faker.name.firstName(),
+    avatar: faker.image.avatar(),
+    username: faker.name.firstName(),
     missed: true,
     incomming: true
   },
   {
     _id: 4,
-    img: faker.image.avatar(),
-    name: faker.name.firstName(),
+    avatar: faker.image.avatar(),
+    username: faker.name.firstName(),
     missed: true,
     incomming: false
   }
@@ -41,8 +41,8 @@ export const CALL_LOGS = [
 export const ChatList = [
     {
       _id: 0,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "9:36",
       unread: 0,
@@ -51,8 +51,8 @@ export const ChatList = [
     },
     {
       _id: 1,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "12:02",
       unread: 2,
@@ -61,8 +61,8 @@ export const ChatList = [
     },
     {
       _id: 2,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "10:35",
       unread: 3,
@@ -71,8 +71,8 @@ export const ChatList = [
     },
     {
       _id: 3,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "04:00",
       unread: 0,
@@ -81,8 +81,8 @@ export const ChatList = [
     },
     {
       _id: 4,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "08:42",
       unread: 0,
@@ -91,8 +91,8 @@ export const ChatList = [
     },
     {
       _id: 5,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "08:42",
       unread: 0,
@@ -101,8 +101,8 @@ export const ChatList = [
     },
     {
       _id: 6,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "08:42",
       unread: 0,
@@ -111,8 +111,8 @@ export const ChatList = [
     },
     {
       _id: 7,
-      img: faker.image.avatar(),
-      name: faker.name.firstName(),
+      avatar: faker.image.avatar(),
+      username: faker.name.firstName(),
       msg: faker.music.songName(),
       time: "08:42",
       unread: 0,
@@ -153,9 +153,9 @@ export const ChatList = [
   
     {
       type: "msg",
-      subtype: "img",
+      subtype: "avatar",
       message: "Here You Go",
-      img: faker.image.abstract(),
+      avatar: faker.image.abstract(),
       incoming: true,
       outgoing: false,
     },

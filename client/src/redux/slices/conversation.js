@@ -41,11 +41,13 @@ const reducers = {
 
   updateCurrentChat: (state, action) => {
     const data = action.payload;
-    console.log("\n\nupdate ucrrent chat = ", { ...data }, "\n\n");
     // msg => _id, from, to, type, (text | media | document), time;
-    state.chats.currentChat = action.payload.map((msg) => {
+    state.chats.currentChat = action.payload.messages.map((msg) => {
+      const d = new Date(msg.time);
+      const time = d.getHours() + " : " + d.getMinutes();
       return {
         ...msg,
+        time,
         incoming: msg.to === _id,
       };
     });

@@ -69,7 +69,7 @@ const verificationHtml = (url) => {
         <div class="container">
             <div class="header">
             <div class="logo">
-                <img src="../views/logo.png" alt="Pied Piper Logo">
+                <img src="${__dirname}/logo.png" alt="Pied Piper Logo">
             </div>
             <h2>Email Verification</h2>
             <p>Thank you for choosing Pied Piper for secure chatting. We take your privacy seriously.</p>

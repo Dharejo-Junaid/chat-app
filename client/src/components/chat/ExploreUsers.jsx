@@ -5,13 +5,16 @@ import { showToast } from "../../redux/slices/app";
 
 const ExploreUserComponent = ({ _id, username, avatar }) => {
   const from = window.localStorage.getItem("_id");
+  const dispatch = useDispatch();
 
   const sendFriendReuquest = (from, to) => {
     socket.emit("send_friend_request", { from, to }, () => {
-      showToast({
-        severity: "success",
-        message: "Friend request has been sent",
-      });
+      dispatch(
+        showToast({
+          severity: "success",
+          message: "Friend request has been sent",
+        })
+      );
     });
   };
 

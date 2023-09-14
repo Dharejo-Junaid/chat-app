@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 
-const schema = new Schema({
+const OneToOneMessage = new Schema({
   participients: [
     {
       type: Schema.ObjectId,
@@ -45,4 +45,25 @@ const schema = new Schema({
   ],
 });
 
-module.exports = model("OneToOneMessage", schema);
+module.exports = model("OneToOneMessage", OneToOneMessage);
+
+
+OneToOneMessage.methods.getAllChats = async function (_id) {
+  return await this.find(
+    {
+      participients: { $all: [_id] },
+    },
+    { _id: true, participients: true }
+  ).populate({
+    path: "participients",
+    match: { _id: { $ne: _id } },
+    select: "_id username avatar email status",
+  });
+};
+
+OneToOneMessage.methods.getChat = async function (chatId) {
+  return ({ messages } = await this.findById(chatId, {
+    _id: false,
+    messages: true,
+  }));
+};

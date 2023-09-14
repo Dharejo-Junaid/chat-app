@@ -1,7 +1,7 @@
 // url => http://localhost:5173/auth/login
 
 const verificationSuccessHtml = (url) => {
-    return `
+  return `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -68,9 +68,6 @@ const verificationSuccessHtml = (url) => {
         <body>
         <div class="container">
             <div class="header">
-            <div class="logo">
-                <img src="../views/logo.png" alt="Pied Piper Logo">
-            </div>
             <h2>Account Verified</h2>
             </div>
             <div class="message">
@@ -83,6 +80,6 @@ const verificationSuccessHtml = (url) => {
         </body>
         </html>
     `;
-}
+};
 
 module.exports = verificationSuccessHtml;

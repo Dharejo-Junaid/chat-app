@@ -41,11 +41,11 @@ const ChatElement = ({ _id, avatar, username, unread, status, email, chatId }) =
 
         <Stack marginLeft={2.5}>
           <Typography variant="subtitle1">{username}</Typography>
-          {/* <Typography variant="caption">{email}</Typography> */}
+          <Typography variant="caption">{email}</Typography>
         </Stack>
       </Stack>
 
-      <Badge color="success" badgeContent={unread} sx={{ mr: "12px" }} />
+      {/* <Badge color="success" badgeContent={unread} sx={{ mr: "12px" }} /> */}
     </Stack>
   );
 };

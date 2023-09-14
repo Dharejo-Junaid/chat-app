@@ -13,7 +13,7 @@ export const TextMessage = ({ incoming, text, time }) => {
         >
           {text}
         </Typography>
-        <Typography variant="caption">{time}</Typography>
+        <Typography variant="caption" alignSelf="end">{time}</Typography>
       </Stack>
     </Stack>
   );

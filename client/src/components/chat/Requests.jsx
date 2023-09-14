@@ -11,14 +11,16 @@ const RequestComponent = ({ _id, sender, createdAt }) => {
     socket.emit("get_all_chats", { _id }, (data) => {
       dispatch(updateAllChats(data));
     });
-  }
+  };
 
   const acceptRequest = () => {
     socket.emit("accept_friend_request", { requestId: _id }, () => {
-      showToast({
-        severity: "success",
-        message: "You just created a new connection",
-      });
+      dispatch(
+        showToast({
+          severity: "success",
+          message: "You just created a new connection",
+        })
+      );
       dispatch(fetchRequests());
       getAllChats();
     });
