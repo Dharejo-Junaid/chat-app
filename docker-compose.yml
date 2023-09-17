@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: "mongo"
+    container_name: "mongo"
+    ports:
+      - 27017:27017
+
+  server:
+    build: ./server
+    container_name: "chat-server"
+    ports:
+      - 5000:5000
+    volumes:
+      - /app/node_modules
+    depends_on:
+      - mongo
+
+  client:
+    build: ./client
+    container_name: "chat-client"
+    ports:
+      - 5173:5173
+    volumes:
+      - /app/node_modules
+    depends_on:
+      - server
