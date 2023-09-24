@@ -1,8 +1,6 @@
 # Pied Piper Messaging Web Application
 
-![Pied Piper Logo](link_to_logo.png)
-
-![Pied Piper Screenshot](link_to_screenshot.png)
+![logo](https://github.com/Dharejo-Junaid/chat-app/blob/main/image.jpeg))
 
 ## Overview
 
