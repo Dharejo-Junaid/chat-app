@@ -27,3 +27,4 @@ Pied Piper is a feature-rich messaging web application that enables users to com
 1. Clone this repository.
 2. Install the necessary dependencies for both front-end and back-end using the package manager of your choice (`npm` or `yarn`).
 3. Create a `.env` file in the root directory and add the following variables:
+   - **PORT, MONGODB_URL, EMAIL, EMAIL_APP_PASSWORD**
